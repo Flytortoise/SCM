@@ -1,0 +1,99 @@
+C51 COMPILER V7.06   25                                                                    07/25/2016 18:32:27 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE 25
+OBJECT MODULE PLACED IN 25.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE 25.C BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          //单片机PWM控制LED
+   2          #include<reg52.h>
+   3          #include<intrins.h>
+   4          #define uchar unsigned char
+   5          uchar PWM;
+   6          sbit deep = P2^3;
+   7          void Beep();
+   8          void delayms(uchar ms);
+   9          void delay(uchar t);
+  10          void main()
+  11          {
+  12   1              P3 = 0xff;
+  13   1              TMOD = 0x21;    //T1为工作方式3，T0为工作方式1
+  14   1              TH0 = 0xfc;
+  15   1              TL0 = 0x66;
+  16   1              EA = 1;
+  17   1              ET0 = 1;
+  18   1              ET1 = 1;
+  19   1              TR0 = 1;
+  20   1              while(1)
+  21   1              {
+  22   2                      if(PWM != 255)
+  23   2                      {
+  24   3                              PWM++;
+  25   3                              delayms(10);
+  26   3                      }
+  27   2                      else Beep();
+  28   2      
+  29   2              }
+  30   1      }
+  31          
+  32          void timer0() interrupt 1
+  33          {
+  34   1              TR1 = 0;
+  35   1              TH0 = 0xfc;
+  36   1              TL0 = 0x66;
+  37   1              TH1 = PWM;
+  38   1              TR1 = 1;
+  39   1              P1 = 0X00;
+  40   1      }
+  41          
+  42          void timer1() interrupt 3
+  43          {
+  44   1              TR1 = 0;
+  45   1              P1 = 0XFF;
+  46   1      }
+  47          
+  48          void Beep()
+  49          {
+  50   1              uchar i;
+  51   1              for(i=0;i<100;i++)
+  52   1              {
+  53   2                      delay(100);
+  54   2                      deep = ~deep;
+  55   2              }
+C51 COMPILER V7.06   25                                                                    07/25/2016 18:32:27 PAGE 2   
+
+  56   1              deep = 1;
+  57   1              delayms(100);
+  58   1      }
+  59          
+  60          void delayms(uchar ms)
+  61          {
+  62   1              uchar i;
+  63   1              while(ms--)
+  64   1              {
+  65   2                      for(i=0;i<120;i++)
+  66   2                              ;
+  67   2              }
+  68   1      
+  69   1      }
+  70          
+  71          void delay(uchar t)
+  72          {
+  73   1              while(t--);
+  74   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    113    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1       1
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

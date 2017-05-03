@@ -1,0 +1,18 @@
+<html>
+<body>
+<pre>
+<h1>礦ision2 Build Log</h1>
+<h2>Project:</h2>
+D:\工作资料\51单片机\TX-1C 单片机开发板\2. 视频教程\视频全部课件\第二课\例程\lesson2_1.uv2
+Project File Date:  12/27/2015
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling lesson5_2.c...
+linking...
+Program Size: data=10.0 xdata=0 code=127
+creating hex file from "lesson2_1"...
+"lesson2_1" - 0 Error(s), 0 Warning(s).
+</pre>
+</body>
+</html>

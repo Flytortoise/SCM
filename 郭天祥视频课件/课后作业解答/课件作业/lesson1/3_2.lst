@@ -1,0 +1,74 @@
+C51 COMPILER V6.12  3_2                                                                    10/02/2007 17:11:25 PAGE 1   
+
+
+C51 COMPILER V6.12, COMPILATION OF MODULE 3_2
+OBJECT MODULE PLACED IN .\3_2.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\lesson3\3_2.c DEBUG OBJECTEXTEND PRINT(.\3_2.lst) OBJECT(.\3_2.obj) 
+
+stmt level    source
+
+   1          /*******************************************************************/
+   2          /* TX-1C单片机实验板实验例程        							   */
+   3          /* 2007年8月第二期培训班课后习题详解							   */
+   4          /* 作者：郭天祥      											   */
+   5          /* 邮箱：txmcu@163.com 										  	   */
+   6          /* 网站：www.txmcu.com(天祥电子)    							   */
+   7          /*【版权】Copyright(C)天祥电子 www.txmcu.com  All Rights Reserved  */
+   8          /*【声明】此程序仅用于学习与参考，引用请注明版权和作者信息！       */
+   9          /*                                                                 */
+  10          /*******************************************************************/
+  11          /*                                                          
+  12          利用定时/计数器T1产生定时时钟,
+  13          由P1口控制8个发光二极管,
+  14          使8个指示灯依次一个一个闪动，
+  15          闪动频率为10次/秒(8个灯依次亮一遍为一个周期)，循环。
+  16          设晶振频率为12MHz。
+  17          */
+  18          /*********************************************************/
+  19          #include<reg52.h>  //52单片机头文件
+  20          #include <intrins.h> //包含有左右循环移位子函数的库
+  21          #define uint unsigned int    //宏定义
+  22          #define uchar unsigned char  //宏定义
+  23          sbit P1_0=P1^0;
+  24          uchar tt,a;
+  25          void main()		    //主函数
+  26          {
+  27   1      	TMOD=0x01;//设置定时器0为工作方式1
+  28   1      	TH0=(65536-50000)/256;
+  29   1      	TL0=(65536-50000)%256;
+  30   1      	EA=1;//开总中断
+  31   1      	ET0=1;//开定时器0中断
+  32   1      	TR0=1;//启动定时器0
+  33   1      	a=0xfe;
+  34   1      	while(1);//等待中断产生
+  35   1      	
+  36   1      }
+  37          
+  38          void timer0() interrupt 1
+  39          {
+  40   1      	TH0=(65536-50000)/256;
+  41   1      	TL0=(65536-50000)%256;
+  42   1      	tt++;
+  43   1      	if(tt==2)
+  44   1      	{
+  45   2      		tt=0;
+  46   2      		P1=a;
+  47   2      		a=_crol_(a,1);
+  48   2      	}
+  49   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     72    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+C51 COMPILER V6.12  3_2                                                                    10/02/2007 17:11:25 PAGE 2   
+
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

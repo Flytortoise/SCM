@@ -1,0 +1,72 @@
+C51 COMPILER V7.06   10                                                                    07/24/2016 12:13:53 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE 10
+OBJECT MODULE PLACED IN 10.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE 10.C BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          //完成在按键按下后从低到高一次点亮8个LED灯并且循环的功能
+   2          #include<reg52.h>
+   3          sbit s1 = P3^4;
+   4          
+   5          void ys(void)
+   6          {
+   7   1              unsigned int a;
+   8   1              for(a=0;a<10000;a++)
+   9   1                      ;
+  10   1      }
+  11          
+  12          void main(void)
+  13          {
+  14   1              unsigned char i;
+  15   1              i=0;
+  16   1              while(1)
+  17   1              {
+  18   2                      if(s1==0)
+  19   2                      {
+  20   3                              ys();
+  21   3                              if(s1==1)
+  22   3                                      i++;
+  23   3                              if(i==9)
+  24   3                                      i=1;
+  25   3                      }
+  26   2                      switch(i)
+  27   2                      {
+  28   3                              case 1:P1=0xfe;
+  29   3                                                                      break;
+  30   3                              case 2:P1=0xfd;
+  31   3                                                                      break;
+  32   3                              case 3:P1=0xfb;
+  33   3                                                                      break;
+  34   3                              case 4:P1=0xf7;
+  35   3                                                                      break;
+  36   3                              case 5:P1=0xef;
+  37   3                                                                      break;
+  38   3                              case 6:P1=0xdf;
+  39   3                                                                      break;
+  40   3                              case 7:P1=0xbf;
+  41   3                                                                      break;
+  42   3                              case 8:P1=0x7f;
+  43   3                                                                      break;
+  44   3                              default:P1=0xff;
+  45   3                      }
+  46   2              }
+  47   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    122    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+C51 COMPILER V7.06   10                                                                    07/24/2016 12:13:53 PAGE 2   
+
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

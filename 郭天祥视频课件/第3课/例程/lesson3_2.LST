@@ -1,0 +1,58 @@
+C51 COMPILER V6.12  LESSON3_2                                                              07/23/2007 10:25:07 PAGE 1   
+
+
+C51 COMPILER V6.12, COMPILATION OF MODULE LESSON3_2
+OBJECT MODULE PLACED IN .\lesson3_2.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE .\lesson3_2.c DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          #include<reg52.h>
+   2          #define uint unsigned int 
+   3          #define uchar unsigned char 
+   4          sbit dula=P2^6;
+   5          sbit wela=P2^7;
+   6          uchar num;
+   7          uchar code table[]={
+   8          0x3f,0x06,0x5b,0x4f,
+   9          0x66,0x6d,0x7d,0x07,
+  10          0x7f,0x6f,0x77,0x7c,
+  11          0x39,0x5e,0x79,0x71};
+  12          void delay(uint z);
+  13          void main()
+  14          {
+  15   1      	wela=1;//11101010
+  16   1      	P0=0xea;
+  17   1      	wela=0;
+  18   1      	while(1)
+  19   1      	{
+  20   2      		for(num=0;num<16;num++)
+  21   2      			{
+  22   3      				dula=1;
+  23   3      				P0=table[num];
+  24   3      				dula=0;
+  25   3      				delay(1000);	
+  26   3      			}
+  27   2      	}
+  28   1      }
+  29          
+  30          void delay(uint z)
+  31          {
+  32   1      	uint x,y;
+  33   1      	for(x=z;x>0;x--)
+  34   1      		for(y=110;y>0;y--);	
+  35   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     70    ----
+   CONSTANT SIZE    =     16    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,31 @@
+<html>
+<body>
+<pre>
+<h1>礦ision2 Build Log</h1>
+<h2>Project:</h2>
+F:\单片机自写程序\88列学会单片机\88列.uv2
+Project File Date:  07/27/2016
+
+<h2>Output:</h2>
+compiling 42.c...
+42.C(155): warning C280: 'b': unreferenced local variable
+42.C(156): warning C280: 'i': unreferenced local variable
+42.C(159): warning C280: 'flag': unreferenced local variable
+42.c - 0 Error(s), 3 Warning(s).
+compiling 42.c...
+42.c - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling 42.c...
+42.C(36): error C202: 'table1': undefined identifier
+42.C(40): error C202: 'table1': undefined identifier
+42.C(44): error C202: 'table1': undefined identifier
+42.C(48): error C202: 'table1': undefined identifier
+42.C(52): error C202: 'table1': undefined identifier
+42.C(56): error C202: 'table1': undefined identifier
+Target not created
+Build target 'Target 1'
+compiling 42.c...
+linking...
+Program Size: data=41.0 xdata=0 code=2901
+creating hex file from "88列"...
+"88列" - 0 Error(s), 0 Warning(s).

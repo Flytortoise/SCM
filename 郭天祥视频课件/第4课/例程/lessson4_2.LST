@@ -1,0 +1,88 @@
+C51 COMPILER V6.12  LESSSON4_2                                                             07/24/2007 09:30:39 PAGE 1   
+
+
+C51 COMPILER V6.12, COMPILATION OF MODULE LESSSON4_2
+OBJECT MODULE PLACED IN .\lessson4_2.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE .\lessson4_2.c DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          #include<reg52.h>
+   2          #include<intrins.h>
+   3          #define uint unsigned int
+   4          #define uchar unsigned char
+   5          uchar temp,aa,numdu,numwe;
+   6          sbit dula=P2^6;
+   7          sbit wela=P2^7;
+   8          uchar code table[]={
+   9          0x3f,0x06,0x5b,0x4f,
+  10          0x66,0x6d,0x7d,0x07,
+  11          0x7f,0x6f,0x77,0x7c,
+  12          0x39,0x5e,0x79,0x71};
+  13          uchar code tablewe[]={
+  14          0xfe,0xfd,0xfb,0xf7,0xef,0xdf};
+  15          //void delay(uint z);
+  16          void main()
+  17          {
+  18   1      	numdu=0;
+  19   1      	numwe=0;
+  20   1      	aa=0;
+  21   1      	TMOD=0x01;
+  22   1      	TH0=(65536-5000)/256;
+  23   1      	TL0=(65536-5000)%256;
+  24   1      	EA=1;
+  25   1      	ET0=1;
+  26   1      	TR0=1;
+  27   1      	while(1)
+  28   1      	{
+  29   2      	//	delay(1000);
+  30   2      	//	temp=_crol_(temp,1);
+  31   2      	//	P1=temp;
+  32   2      		if(aa==1)
+  33   2      			{	
+  34   3      				aa=0;
+  35   3      				numdu++;
+  36   3      				if(numdu==7)
+  37   3      					numdu=1;
+  38   3      				dula=1;
+  39   3      				P0=table[numdu];
+  40   3      				dula=0;
+  41   3      				wela=1;
+  42   3      				P0=tablewe[numwe];
+  43   3      				wela=0;
+  44   3      				numwe++;
+  45   3      				if(numwe==6)
+  46   3      					numwe=0;
+  47   3      			}
+  48   2      	}
+  49   1      }
+  50          /*
+  51          void delay(uint z)
+  52          {
+  53          	uint x,y;
+  54          	for(x=z;x>0;x--)
+  55          		for(y=110;y>0;y--);
+C51 COMPILER V6.12  LESSSON4_2                                                             07/24/2007 09:30:39 PAGE 2   
+
+  56          }*/
+  57          
+  58          void timer0() interrupt 1 
+  59          {
+  60   1      	TH0=(65536-5000)/256;
+  61   1      	TL0=(65536-5000)%256;
+  62   1      	aa++;	
+  63   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     85    ----
+   CONSTANT SIZE    =     22    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      4    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

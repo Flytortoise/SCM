@@ -1,0 +1,160 @@
+C51 COMPILER V7.06   LESSON9                                                               02/22/2016 21:44:57 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE LESSON9
+OBJECT MODULE PLACED IN .\lesson9.obj
+COMPILER INVOKED BY: d:\prg\Keil\C51\BIN\C51.EXE ..\..\第九课\例程\lesson9.c DEBUG OBJECTEXTEND PRINT(.\lesson9.lst) OBJ
+                    -ECT(.\lesson9.obj)
+
+stmt level    source
+
+   1          #include<reg52.h>
+   2          #define uchar unsigned char
+   3          sbit sda=P2^0;
+   4          sbit scl=P2^1;
+   5          uchar a;
+   6          void delay()
+   7          { ;; }
+   8          void start()  //开始信号
+   9          {       
+  10   1              sda=1;
+  11   1              delay();
+  12   1              scl=1;
+  13   1              delay();
+  14   1              sda=0;
+  15   1              delay();
+  16   1      }
+  17          
+  18          void stop()   //停止
+  19          {
+  20   1              sda=0;
+  21   1              delay();
+  22   1              scl=1;
+  23   1              delay();
+  24   1              sda=1;
+  25   1              delay();
+  26   1      }
+  27          
+  28          void respons()  //应答
+  29          {
+  30   1              uchar i;
+  31   1              scl=1;
+  32   1              delay();
+  33   1              while((sda==1)&&(i<250))i++;
+  34   1              scl=0;
+  35   1              delay();
+  36   1      }
+  37          
+  38          void init()
+  39          {
+  40   1              sda=1;
+  41   1              delay();
+  42   1              scl=1;
+  43   1              delay();
+  44   1      }
+  45          
+  46          void write_byte(uchar date)
+  47          {
+  48   1              uchar i,temp;
+  49   1              temp=date;
+  50   1      
+  51   1      
+  52   1              for(i=0;i<8;i++)
+  53   1              {
+  54   2                      temp=temp<<1;
+C51 COMPILER V7.06   LESSON9                                                               02/22/2016 21:44:57 PAGE 2   
+
+  55   2                      scl=0;
+  56   2                  delay();
+  57   2                      sda=CY;
+  58   2                      delay();
+  59   2                      scl=1;
+  60   2                      delay();
+  61   2              //      scl=0;
+  62   2           //   delay();
+  63   2              }
+  64   1              scl=0;
+  65   1              delay();
+  66   1              sda=1;
+  67   1              delay();
+  68   1      }
+  69          
+  70          uchar read_byte()
+  71          {
+  72   1              uchar i,k;
+  73   1              scl=0;
+  74   1              delay();
+  75   1              sda=1;
+  76   1              delay();
+  77   1              for(i=0;i<8;i++)
+  78   1              {
+  79   2                      scl=1;
+  80   2                      delay();        
+  81   2                      k=(k<<1)|sda;
+  82   2                      scl=0;
+  83   2                      delay();        
+  84   2              }
+  85   1              return k;
+  86   1      }
+  87          
+  88          void delay1(uchar x)
+  89          {
+  90   1              uchar a,b;
+  91   1              for(a=x;a>0;a--)
+  92   1               for(b=100;b>0;b--);
+  93   1      }
+  94          
+  95          void write_add(uchar address,uchar date)
+  96          {
+  97   1              start();
+  98   1              write_byte(0xa0);
+  99   1              respons();
+ 100   1              write_byte(address);
+ 101   1              respons();
+ 102   1              write_byte(date);
+ 103   1              respons();
+ 104   1              stop();
+ 105   1      }
+ 106          
+ 107          uchar read_add(uchar address)
+ 108          {
+ 109   1              uchar date;
+ 110   1              start();
+ 111   1              write_byte(0xa0);
+ 112   1              respons();
+ 113   1              write_byte(address);
+ 114   1              respons();
+ 115   1              start();
+ 116   1              write_byte(0xa1);
+C51 COMPILER V7.06   LESSON9                                                               02/22/2016 21:44:57 PAGE 3   
+
+ 117   1              respons();
+ 118   1              date=read_byte();
+ 119   1              stop();
+ 120   1              return date;
+ 121   1      }
+ 122          
+ 123          void main()
+ 124          {
+ 125   1              init();
+ 126   1              write_add(23,0xaa);
+ 127   1              delay1(100);
+ 128   1              P1=read_add(23);
+ 129   1              while(1);
+ 130   1      }
+ 131          
+ 132          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    228    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1       1
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

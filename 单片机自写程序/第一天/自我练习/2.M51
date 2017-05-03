@@ -1,0 +1,134 @@
+BL51 BANKED LINKER/LOCATER V5.03                                                        07/08/2016  22:04:12  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V5.03, INVOKED BY:
+D:\KEIL\C51\BIN\BL51.EXE 2.obj TO 2 RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  2.obj (2)
+  D:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  D:\KEIL\C51\LIB\C51S.LIB (?C?UIDIV)
+
+
+LINK MAP OF MODULE:  2 (2)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0002H     UNIT         _DATA_GROUP_
+            IDATA   000AH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     00F5H     UNIT         ?PR?MAIN?2
+            CODE    00F8H     0055H     UNIT         ?C?LIB_CODE
+            CODE    014DH     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   2 (2)
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?2
+
+?PR?MAIN?2                     0008H    0002H
+
+
+
+SYMBOL TABLE OF MODULE:  2 (2)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        2
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  C:0003H         PUBLIC        main
+  D:0098H         PUBLIC        SCON
+BL51 BANKED LINKER/LOCATER V5.03                                                      07/08/2016  22:04:12  PAGE 2
+
+
+  D:0088H         PUBLIC        TCON
+  D:00C8H         PUBLIC        T2CON
+  B:0090H.0       PUBLIC        D0
+  B:0090H.1       PUBLIC        D1
+  B:0090H.2       PUBLIC        D2
+  B:0090H.3       PUBLIC        D3
+  B:0090H.4       PUBLIC        D4
+  B:0090H.5       PUBLIC        D5
+  B:0090H.6       PUBLIC        D6
+  B:0090H.7       PUBLIC        D7
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          MAIN
+  -------         DO            
+  D:0002H         SYMBOL        i
+  D:0082H         SYMBOL        j
+  D:0008H         SYMBOL        k
+  -------         ENDDO         
+  C:0003H         LINE#         10
+  C:0003H         LINE#         11
+  C:0003H         LINE#         13
+  C:0009H         LINE#         14
+  C:001AH         LINE#         15
+  C:001AH         LINE#         16
+  C:001EH         LINE#         17
+  C:001EH         LINE#         18
+  C:002DH         LINE#         19
+  C:0031H         LINE#         21
+  C:0033H         LINE#         22
+  C:0042H         LINE#         23
+  C:0046H         LINE#         25
+  C:0048H         LINE#         26
+  C:0057H         LINE#         27
+  C:005BH         LINE#         29
+  C:005DH         LINE#         30
+  C:006CH         LINE#         31
+  C:0070H         LINE#         33
+  C:0072H         LINE#         34
+  C:0081H         LINE#         35
+  C:0085H         LINE#         37
+  C:0087H         LINE#         38
+  C:0096H         LINE#         39
+  C:009AH         LINE#         41
+  C:009CH         LINE#         42
+  C:00ABH         LINE#         43
+  C:00AFH         LINE#         45
+  C:00B1H         LINE#         46
+  C:00C0H         LINE#         47
+  C:00C4H         LINE#         49
+  C:00C6H         LINE#         51
+  C:00D8H         LINE#         52
+  C:00DCH         LINE#         53
+  C:00E6H         LINE#         54
+  C:00E6H         LINE#         55
+  C:00E9H         LINE#         56
+  C:00E9H         LINE#         57
+  C:00ECH         LINE#         58
+  C:00F7H         LINE#         59
+BL51 BANKED LINKER/LOCATER V5.03                                                      07/08/2016  22:04:12  PAGE 3
+
+
+  C:00F7H         LINE#         60
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        2
+
+  -------         MODULE        ?C?UIDIV
+  C:00F8H         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+Program Size: data=11.0 xdata=0 code=345
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,121 @@
+C51 COMPILER V7.06   课_笞饕_7                                                             07/11/2016 19:33:03 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE 课_笞饕_7
+OBJECT MODULE PLACED IN 课后作业7.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE 课后作业7.c BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          #include<reg52.h>
+   2          #include <intrins.h>
+   3          sbit D0=P1^0;
+   4          typedef unsigned int uint;
+   5          typedef unsigned char uchar;
+   6          void relay()
+   7          {
+   8   1              uint i;
+   9   1              for(i=0;i<18500;i++)
+  10   1                      ;       
+  11   1      }               //100ms 的延迟
+  12          
+  13          void main()
+  14          {
+  15   1              while(1)
+  16   1              {
+  17   2                      uint k,j,i;
+  18   2                      for(i=0;i<3;i++)                //先奇数亮再偶数亮
+  19   2                      {       
+  20   3                              P1=0X55;
+  21   3                              for(j=0;j<3;j++)
+  22   3                                      relay();
+  23   3                              P1=0XAA;
+  24   3                              for(j=0;j<3;j++)
+  25   3                                      relay();
+  26   3                      }
+  27   2                      P1=0XFF;                        //复位
+  28   2                      for(i=0;i<3;i++)                //上下循环三次
+  29   2                      {
+  30   3                              uchar a=0xfe;
+  31   3                              for(k=8;k>0;k--)
+  32   3                              {       P1=a;
+  33   4                                      for(j=0;j<3;j++)
+  34   4                                      relay();
+  35   4                                      P1=0xff;
+  36   4                                      for(j=0;j<3;j++)
+  37   4                                      relay();
+  38   4                                      a=_crol_(a,1);          //循环左移
+  39   4                              }
+  40   3                              a=0x7f;
+  41   3                              for(k=8;k>0;k--)
+  42   3                              {       P1=a;
+  43   4                                      for(j=0;j<3;j++)
+  44   4                                      relay();
+  45   4                                      P1=0xff;
+  46   4                                      for(j=0;j<3;j++)
+  47   4                                      relay();
+  48   4                                      a=_cror_(a,1);          //循环右移
+  49   4                              }
+  50   3                      }
+  51   2                      P1=0XFF;                        //复位
+  52   2                      for(i=0;i<3;i++)                //从两边往中间
+  53   2                      {
+  54   3                              P1=0x7e;
+  55   3                              for(j=0;j<3;j++)
+C51 COMPILER V7.06   课_笞饕_7                                                             07/11/2016 19:33:03 PAGE 2   
+
+  56   3                                      relay();
+  57   3                              P1=0xbd;
+  58   3                              for(j=0;j<3;j++)
+  59   3                                      relay();
+  60   3                              P1=0xdb;
+  61   3                              for(j=0;j<3;j++)
+  62   3                                      relay();
+  63   3                              P1=0xe7;
+  64   3                              for(j=0;j<3;j++)
+  65   3                                      relay();
+  66   3                      }
+  67   2                      P1=0XFF;                        //复位
+  68   2                      for(i=0;i<3;i++)                //从中间往两边
+  69   2                      {
+  70   3                              P1=0xe7;
+  71   3                              for(j=0;j<3;j++)
+  72   3                                      relay();
+  73   3                              P1=0xdb;
+  74   3                              for(j=0;j<3;j++)
+  75   3                                      relay();
+  76   3                              P1=0xbd;
+  77   3                              for(j=0;j<3;j++)
+  78   3                                      relay();
+  79   3                              P1=0x7e;
+  80   3                              for(j=0;j<3;j++)
+  81   3                                      relay();
+  82   3                      }
+  83   2                      P1=0XFF;                        //复位
+  84   2                      for(i=0;i<3;i++)                //全闪烁
+  85   2                      {
+  86   3                              P1=0x00;
+  87   3                              for(j=0;j<3;j++)
+  88   3                                      relay();
+  89   3                              P1=0xff;
+  90   3                              for(j=0;j<3;j++)
+  91   3                                      relay();
+  92   3                      }
+  93   2                      while(1);
+  94   2              }
+  95   1      }
+  96          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    677    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       7
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

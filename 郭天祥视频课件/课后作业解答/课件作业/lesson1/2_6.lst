@@ -1,0 +1,71 @@
+C51 COMPILER V6.12  2_6                                                                    10/01/2007 13:56:48 PAGE 1   
+
+
+C51 COMPILER V6.12, COMPILATION OF MODULE 2_6
+OBJECT MODULE PLACED IN .\2_6.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\lesson2\2_6.c DEBUG OBJECTEXTEND PRINT(.\2_6.lst) OBJECT(.\2_6.obj) 
+
+stmt level    source
+
+   1          /*******************************************************************/
+   2          /* TX-1C单片机实验板实验例程        							   */
+   3          /* 2007年8月第二期培训班课后习题详解							   */
+   4          /* 作者：郭天祥      											   */
+   5          /* 邮箱：txmcu@163.com 										  	   */
+   6          /* 网站：www.txmcu.com(天祥电子)    							   */
+   7          /*【版权】Copyright(C)天祥电子 www.txmcu.com  All Rights Reserved  */
+   8          /*【声明】此程序仅用于学习与参考，引用请注明版权和作者信息！       */
+   9          /*                                                                 */
+  10          /*******************************************************************/
+  11          /*                                                          
+  12          间隔300ms第一次一个管亮流动一次，
+  13          第二次两个管亮流动，依次到8个管亮，
+  14          然后重复整个过程。
+  15          */
+  16          /*********************************************************/
+  17          #include<reg52.h>  //52单片机头文件
+  18          #include <intrins.h> //包含有左右循环移位子函数的库
+  19          #define uint unsigned int    //宏定义
+  20          #define uchar unsigned char  //宏定义
+  21          void delay(uint z)  //延时函数,z的取值为这个函数的延时ms数，如delay(200);大约延时200ms.
+  22          {					//delay(500);大约延时500ms.
+  23   1      	uint x,y;
+  24   1      	for(x=z;x>0;x--)
+  25   1      		for(y=110;y>0;y--);	
+  26   1      }
+  27          void main()		    //主函数
+  28          {
+  29   1      	uchar a,i,j;
+  30   1      	while(1)        //大循环
+  31   1      	{
+  32   2      			a=0xfe;     //赋初值
+  33   2      			for(j=0;j<8;j++)
+  34   2      			{
+  35   3      				for(i=0;i<8-j;i++)   //左移
+  36   3      				{
+  37   4      					P1=a;       //点亮小灯
+  38   4      					delay(200); //延时200毫秒
+  39   4      					a=_crol_(a,1); //将a变量循环左移一位
+  40   4      				}
+  41   3      				a=_crol_(a,j);
+  42   3      				P1=0xff;
+  43   3      				a=a<<1;
+  44   3      			}
+  45   2      	}
+  46   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     95    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+C51 COMPILER V6.12  2_6                                                                    10/01/2007 13:56:48 PAGE 2   
+
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

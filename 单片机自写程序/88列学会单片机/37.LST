@@ -1,0 +1,48 @@
+C51 COMPILER V7.06   37                                                                    07/26/2016 11:26:09 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE 37
+OBJECT MODULE PLACED IN 37.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE 37.C BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          //完成独立式按键利用软件消抖点亮第一个LED
+   2          #include<reg52.h>
+   3          sbit S1 = P3^7;
+   4          sbit LED = P1^0;
+   5          void ys()
+   6          {
+   7   1              unsigned char i,j;
+   8   1              for(i=0;i<100;i++)
+   9   1              for(j=0;j<100;j++)
+  10   1                      ;
+  11   1      }
+  12          
+  13          void mian()
+  14          {
+  15   1              LED = 0;
+  16   1              while(1)
+  17   1              {
+  18   2                      if(S1 == 0)
+  19   2                      {
+  20   3                              ys();
+  21   3                              if(S1 == 0)
+  22   3                              LED = !LED;
+  23   3                      }
+  24   2              }
+  25   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     28    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

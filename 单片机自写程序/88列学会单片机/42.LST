@@ -1,0 +1,339 @@
+C51 COMPILER V7.06   42                                                                    10/26/2016 10:31:18 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE 42
+OBJECT MODULE PLACED IN 42.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE 42.c BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          /*      2016年10月26日 10:19:02  单片机实习 计算器数码管显示，从23号下午开始
+   2                  缺陷：1.显示只能从最左边开始，位数不能跳转。
+   3                            2.不支持浮点运算,运算不精确
+   4                            3.第二个运算符必须为'='
+   5                            4.仅支持正数的加减乘除，且结果也必须为正才行  */
+   6          
+   7          
+   8          #include<absacc.h>
+   9          #include<reg51.h>
+  10          #define dula XBYTE[0x08004]
+  11          #define wela XBYTE[0x08002] //列与位复用
+  12          #define hang XBYTE[0X08001]
+  13          unsigned char code table1[] = {0x01,0x02,0x04,0x08,0x10,0x20};  //选择数码管第几位显示
+  14          unsigned char code table2[] = {0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f,0x7c,0x39,0x5e,0x79,0x71,
+             -0x00};
+  15                    //显示0~F,最后一个是不显示
+  16          unsigned char s1,s2,s3,s4,s5,s6;        //显示的6位
+  17          unsigned int wei,num,ok;        //wei记录位数， num记录具体数字， ok记录产生的第几个符号
+  18          void init()       //初始化
+  19          {
+  20   1       dula = 0x00;
+  21   1       wela = 0x00;
+  22   1       s1 = 16; s2 = 16; s3 = 16; s4 = 16; s5 = 16 ; s6 = 16 ;
+  23   1       wei = 0; ok = 0;num = 0;
+  24   1      }
+  25          
+  26          void delay(unsigned int i)            //延迟,i为1时，延迟1ms
+  27          {
+  28   1         unsigned int j,k;
+  29   1         for(j = 0;j < i;j++)
+  30   1               for(k = 0; k<200;k++);
+  31   1      
+  32   1      }
+  33          void display(unsigned a,unsigned b,unsigned c,unsigned d,unsigned e,unsigned f)
+  34                            
+  35          {
+  36   1            wela = table1[5];          //显示位选
+  37   1            dula = table2[a];          //a用于显示段选
+  38   1            delay(22);
+  39   1                      
+  40   1                wela = table1[4];          
+  41   1            dula = table2[b];         
+  42   1            delay(22);
+  43   1      
+  44   1                wela = table1[3];          
+  45   1            dula = table2[c];         
+  46   1            delay(22);
+  47   1      
+  48   1                wela = table1[2];          
+  49   1            dula = table2[d];         
+  50   1            delay(22);
+  51   1      
+  52   1            wela = table1[1];          
+  53   1            dula = table2[e];         
+  54   1            delay(22);
+C51 COMPILER V7.06   42                                                                    10/26/2016 10:31:18 PAGE 2   
+
+  55   1      
+  56   1            wela = table1[0];          
+  57   1            dula = table2[f];         
+  58   1            delay(22);
+  59   1      }
+  60          void scanf1()   //输入
+  61          {
+  62   1          unsigned int i;
+  63   1              wela = 0xDF;    //第一列
+  64   1              while(hang == 0);
+  65   1              i = hang;
+  66   1              i = i&0x0F;
+  67   1              while(i != 0x0F)  //有值输入
+  68   1              {
+  69   2                //delay(2);
+  70   2               i = hang;      //消前抖动
+  71   2               i = i&0x0F;
+  72   2               while(i != 0x0F)
+  73   2               {
+  74   3                  i = hang;
+  75   3                  i = i&0x0F;
+  76   3                  wela = 0x00;
+  77   3                  switch(i)
+  78   3                  {
+  79   4                   case 0x07: num = 7;wei++;break;
+  80   4                   case 0x0B: num = 4;wei++;break;
+  81   4                   case 0x0D: num = 1;wei++;break;
+  82   4                   case 0x0E: num = 0;wei++;break;
+  83   4                  }
+  84   3                  while(i != 0x0F)    //消后抖
+  85   3                  {
+  86   4                   i = hang;
+  87   4                   i = i&0x0F;
+  88   4                  }                  
+  89   3               }
+  90   2              }
+  91   1              
+  92   1              wela = 0xEF;       //第二列
+  93   1              i = hang;
+  94   1              i = i&0x0F;
+  95   1              while(i != 0x0F)  //有值输入
+  96   1              {
+  97   2                //delay(2);
+  98   2               i = hang;      //消前抖动
+  99   2               i = i&0x0F;
+ 100   2               while(i != 0x0F)
+ 101   2               {
+ 102   3                  i = hang;
+ 103   3                  i = i&0x0F;
+ 104   3                  wela = 0x00;
+ 105   3                  switch(i)
+ 106   3                  {
+ 107   4                   case 0x07: num = 8;wei++;break;
+ 108   4                   case 0x0B: num = 5;wei++;break;
+ 109   4                   case 0x0D: num = 2;wei++;break;
+ 110   4                   case 0x0E: num = 15;ok++;break;
+ 111   4                  }
+ 112   3                  while(i != 0x0F)    //消后抖
+ 113   3                  {
+ 114   4                   i = hang;
+ 115   4                   i = i&0x0F;
+ 116   4                  }
+C51 COMPILER V7.06   42                                                                    10/26/2016 10:31:18 PAGE 3   
+
+ 117   3               }
+ 118   2              }
+ 119   1              
+ 120   1              wela = 0xF7;        //第三列
+ 121   1              i = hang;
+ 122   1              i = i&0x0F;
+ 123   1              while(i != 0x0F)  //有值输入
+ 124   1              {
+ 125   2                //delay(2);
+ 126   2               i = hang;      //消前抖动
+ 127   2               i = i&0x0F;
+ 128   2               while(i != 0x0F)
+ 129   2               {
+ 130   3                  i = hang;
+ 131   3                  i = i&0x0F;
+ 132   3                  wela = 0x00;
+ 133   3                  switch(i)
+ 134   3                  {
+ 135   4                   case 0x07: num = 9;wei++;break;
+ 136   4                   case 0x0B: num = 6;wei++;break;
+ 137   4                   case 0x0D: num = 3;wei++;break;
+ 138   4                   case 0x0E: num = 14;ok++;break;
+ 139   4                  }
+ 140   3                  while(i != 0x0F)    //消后抖
+ 141   3                  {
+ 142   4                   i = hang;
+ 143   4                   i = i&0x0F;
+ 144   4                  }
+ 145   3               }
+ 146   2              }
+ 147   1              
+ 148   1              
+ 149   1               wela = 0xFB;    //第4列
+ 150   1              i = hang;
+ 151   1              i = i&0x0F;
+ 152   1              while(i != 0x0F)  //有值输入
+ 153   1              {
+ 154   2                //delay(2);
+ 155   2               i = hang;      //消前抖动
+ 156   2               i = i&0x0F;
+ 157   2               while(i != 0x0F)
+ 158   2               {
+ 159   3                  i = hang;
+ 160   3                  i = i&0x0F;
+ 161   3                  wela = 0x00;
+ 162   3                  switch(i)
+ 163   3                  {
+ 164   4                   case 0x07: num = 10;ok++;break;
+ 165   4                   case 0x0B: num = 11;ok++;break;
+ 166   4                   case 0x0D: num = 12;ok++;break;
+ 167   4                   case 0x0E: num = 13;ok++;break;
+ 168   4                  }
+ 169   3                  while(i != 0x0F)    //消后抖
+ 170   3                  {
+ 171   4                   i = hang;
+ 172   4                   i = i&0x0F;
+ 173   4                  }                  
+ 174   3               }
+ 175   2              }
+ 176   1      }
+ 177          
+ 178          void fenjie(int a)
+C51 COMPILER V7.06   42                                                                    10/26/2016 10:31:18 PAGE 4   
+
+ 179          {
+ 180   1              if(a>=0 && a<10)
+ 181   1              {
+ 182   2                      s1 = a; s2 = 16; s3 = 16; s4 = 16; s5 = 16 ; s6 = 16 ;
+ 183   2              }
+ 184   1              if(a>9 && a<100)
+ 185   1              {
+ 186   2                      s1 = a/10;
+ 187   2                      s2 = a%10;
+ 188   2                      s3 = 16; s4 = 16; s5 = 16 ; s6 = 16 ;
+ 189   2              }
+ 190   1              if(a>99 & a<1000)
+ 191   1              {
+ 192   2                      s1 = a/100;
+ 193   2                      s2 = a/10%10;
+ 194   2                      s3 = a%10;
+ 195   2                      s4 = 16; s5 = 16 ; s6 = 16 ;
+ 196   2              }
+ 197   1              if(a>999 && a<10000)
+ 198   1              {
+ 199   2                      s1 = a/1000;
+ 200   2                      s2 = a/100%10;
+ 201   2                      s3 = a/10%10;
+ 202   2                      s4 = a%10;
+ 203   2                      s5 = 16 ; s6 = 16 ;
+ 204   2              }
+ 205   1              if(a>9999 && a<100000)
+ 206   1              {
+ 207   2                      s1 = a/10000;
+ 208   2                      s2 = a/1000%10;
+ 209   2                      s3 = a/100%10;
+ 210   2                      s4 = a/10%10;
+ 211   2                      s5 = a%10 ; s6 = 16 ;
+ 212   2              }
+ 213   1              if(a>99999 && a<1000000)
+ 214   1              {
+ 215   2                      s1 = a/100000;
+ 216   2                      s2 = a/10000%10;
+ 217   2                      s3 = a/1000%10;
+ 218   2                      s4 = a/100%10;
+ 219   2                      s5 = a/10%10 ; 
+ 220   2                      s6 = a%10 ;
+ 221   2              }
+ 222   1      }
+ 223          
+ 224          void main()
+ 225          {
+ 226   1       unsigned int shu1,fuhao;
+ 227   1       int shu2 = -1;
+ 228   1       int shu  = -1;
+ 229   1       init();//初始化，全部清零
+ 230   1       while(1)
+ 231   1       {
+ 232   2         
+ 233   2         scanf1();    //按键输入
+ 234   2         if(wei)
+ 235   2              {
+ 236   3                      switch(wei)             //将具体的每一位记录在s中
+ 237   3                      {
+ 238   4                              case 1: s1 = num;break;
+ 239   4                              case 2: s2 = num;break;
+ 240   4                              case 3: s3 = num;break;
+C51 COMPILER V7.06   42                                                                    10/26/2016 10:31:18 PAGE 5   
+
+ 241   4                              case 4: s4 = num;break;
+ 242   4                              case 5: s5 = num;break;
+ 243   4                              case 6: s6 = num;break;
+ 244   4                      }
+ 245   3              }
+ 246   2         if(ok == 1)  //输入符号时，ok会自动+1，ok为1，说明出现第一个符号
+ 247   2              {
+ 248   3                      switch(num)             //记录这个符号
+ 249   3                      {
+ 250   4                              case 10: fuhao = 10;break;
+ 251   4                              case 11: fuhao = 11;break;
+ 252   4                              case 12: fuhao = 12;break;
+ 253   4                              case 13: fuhao = 13;break;
+ 254   4                              case 14: fuhao = 14;break;      //第一个符号为=时，不做任何操作
+ 255   4                              case 15: init();break;  //清零符号
+ 256   4                      }
+ 257   3                      switch(wei)             //生成第一个具体数字
+ 258   3                      {
+ 259   4                              case 1: shu1 = s1;break;
+ 260   4                              case 2: shu1 = s1*10+s2;break;
+ 261   4                              case 3: shu1 = s1*100+s2*10+s3;break;
+ 262   4                              case 4: shu1 = s1*1000+s2*100+s3*10+s4;break;
+ 263   4                              case 5: shu1 = s1*10000+s2*1000+s3*100+s4*10+s5;break;
+ 264   4                              case 6: shu1 = s1*100000+s2*10000+s3*1000+s4*100+s5*10+s6;break;
+ 265   4                      }
+ 266   3                      wei = 0;                //清零来生成第二个数字
+ 267   3                      s1 = fuhao;             //显示符号，顺便清零
+ 268   3                      s2 = 16; s3 = 16; s4 = 16;s5 = 16 ; s6 = 16 ;
+ 269   3              }
+ 270   2              if(ok == 2)                     //说明产生第二个符号，这里规定第二个符号必须为'='
+ 271   2              {       
+ 272   3                      ok = 0;                 //清零，以便下次运算
+ 273   3                      switch(wei)             //生成第二个数字
+ 274   3                      {
+ 275   4                              case 1: shu2 = s1;break;
+ 276   4                              case 2: shu2 = s1*10+s2;break;
+ 277   4                              case 3: shu2 = s1*100+s2*10+s3;break;
+ 278   4                              case 4: shu2 = s1*1000+s2*100+s3*10+s4;break;
+ 279   4                              case 5: shu2 = s1*10000+s2*1000+s3*100+s4*10+s5;break;
+ 280   4                              case 6: shu2 = s1*100000+s2*10000+s3*1000+s4*100+s5*10+s6;break;
+ 281   4                      }
+ 282   3                      wei = 0;                //清零，以便下次运算
+ 283   3              }
+ 284   2              if(shu2 != -1)          //第二个数字已经产生
+ 285   2          {
+ 286   3                      switch(fuhao)   //根据第一个符号，来计算结果
+ 287   3                      {
+ 288   4                              case 10: shu = shu1 + shu2;break;
+ 289   4                              case 11: shu = shu1 - shu2;break;
+ 290   4                              case 12: shu = shu1 * shu2;break;
+ 291   4                              case 13: shu = shu1 / shu2;break;
+ 292   4                              case 14: ;break;                //第一个符号为=，不做任何操作
+ 293   4                              case 15: init();break;  //清零按键
+ 294   4                      }
+ 295   3                      
+ 296   3              }
+ 297   2              if(shu != -1)   //结果已经产生
+ 298   2              {
+ 299   3                      fenjie(shu);    //将结果分解到每一位的具体数字
+ 300   3              }
+ 301   2         display(s1,s2,s3,s4,s5,s6) ;    
+ 302   2       }
+C51 COMPILER V7.06   42                                                                    10/26/2016 10:31:18 PAGE 6   
+
+ 303   1      }
+ 304          
+ 305          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   2332    ----
+   CONSTANT SIZE    =     22    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     12      22
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

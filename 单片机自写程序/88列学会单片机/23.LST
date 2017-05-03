@@ -1,0 +1,63 @@
+C51 COMPILER V7.06   23                                                                    07/25/2016 17:46:11 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE 23
+OBJECT MODULE PLACED IN 23.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE 23.C BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          //串行控制流水灯循环点亮
+   2          #include<reg52.h>
+   3          #include<intrins.h>
+   4          unsigned char code Tab[] = {0xfe,0xfd,0xfb,0xf7,0xef,0xdf,0xbf,0x7f};
+   5          sbit CLR = P2^7;        
+   6          void ys(void)
+   7          {
+   8   1              unsigned char m,n;
+   9   1              for(m=0;m<200;m++)
+  10   1              for(n=0;n<250;n++)
+  11   1                      ;
+  12   1      }
+  13          
+  14          void Send(unsigned char dat)
+  15          {
+  16   1              CLR = 0;
+  17   1              _nop_();
+  18   1              _nop_();
+  19   1              CLR = 1;
+  20   1              SBUF = dat;
+  21   1              while(TI==0)
+  22   1                      ;
+  23   1              TI = 0;
+  24   1      }
+  25          
+  26          void main()
+  27          {
+  28   1              unsigned char i;
+  29   1              SCON = 0x00;
+  30   1              while(1)
+  31   1              {
+  32   2                      for(i=0;i<8;i++)
+  33   2                      {
+  34   3                              Send(Tab[i]);
+  35   3                              ys();
+  36   3                      }
+  37   2              }
+  38   1      }
+  39          
+  40          //本题将串口中断TXD(P3.1，串行输出口)，与74LX164相连，P2.7与MR非相连；无该电路板，无法验证
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     50    ----
+   CONSTANT SIZE    =      8    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

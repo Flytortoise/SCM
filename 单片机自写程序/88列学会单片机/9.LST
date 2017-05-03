@@ -1,0 +1,39 @@
+C51 COMPILER V7.06   9                                                                     07/24/2016 11:55:26 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE 9
+OBJECT MODULE PLACED IN 9.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE 9.C BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          //完成在按键按下后，相应的LED灯点亮，松开熄灭
+   2          #include<reg52.h>
+   3          sbit S1 = P3^4;
+   4          sbit S2 = P3^5;
+   5          void main(void)
+   6          {
+   7   1              while(1)
+   8   1              {
+   9   2                      if(S1==0)
+  10   2                              P1=0x0f;
+  11   2                      if(S2==0)
+  12   2                              P1=0xf0;
+  13   2              }
+  14   1      }
+  15          
+  16          //这条程序不对，需要按键检测和松手检测
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     14    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

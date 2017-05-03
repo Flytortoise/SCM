@@ -1,0 +1,54 @@
+C51 COMPILER V7.06   _ÚÒ»Ìâ                                                                07/14/2016 10:52:46 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE _ÚÒ»Ìâ
+OBJECT MODULE PLACED IN µÚÒ»Ìâ.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE µÚÒ»Ìâ.C BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          #include<reg52.h>
+   2          typedef unsigned int uint;
+   3          typedef unsigned char uchar;
+   4          sbit D0=P1^0;
+   5          uint k;
+   6          void main()
+   7          {
+   8   1              k=0;    
+   9   1              EA=1;
+  10   1              ET0=1;
+  11   1              TR0=1;
+  12   1              TMOD=0X01;
+  13   1              TH0=(65536-50000)/256;
+  14   1              TL0=(65536-50000)%256;
+  15   1              while(1)
+  16   1              {
+  17   2                      if(k==10)
+  18   2                      {
+  19   3                              k=0;
+  20   3                              D0=~D0;
+  21   3                      }       
+  22   2              }
+  23   1      }
+  24          
+  25          void time0() interrupt 1
+  26          {       
+  27   1              TH0=(65536-50000)/256;
+  28   1              TL0=(65536-50000)%256;
+  29   1              k++;
+  30   1              
+  31   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     55    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,158 @@
+C51 COMPILER V7.06   MAIN                                                                  01/07/2010 17:29:07 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          #include<reg52.h>
+   2          #define uint unsigned int
+   3          #define uchar unsigned char
+   4          
+   5          uchar a,i,flag=0,date;
+   6          uchar b1,b2,b3,b4,b5,b6;
+   7          uint dat=0,buf1,buf2;
+   8          sbit dula=P2^6;
+   9          sbit wela=P2^7;
+  10          uchar code table[]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,                         //数码管编码
+  11                                  0x07,0x7f,0x6f,0x77,0x7c,0x39,0x5e,0x79,0x71};
+  12          
+  13          void delay(unsigned char i)             //延时程序
+  14          {       
+  15   1              uchar j,k;
+  16   1        for(j=i;j>0;j--)
+  17   1          for(k=125;k>0;k--);
+  18   1      }
+  19          void UART_init()
+  20          {
+  21   1              TMOD=0x20;
+  22   1              TH1=0xfd;
+  23   1              TL1=0xfd;
+  24   1              TR1=1;
+  25   1              SM0=0;
+  26   1              SM1=1;
+  27   1              REN=1;
+  28   1              EA=1;
+  29   1              ES=1;
+  30   1              PCON=0x80;
+  31   1      }
+  32          
+  33          void display(uint date)                 //显示程序
+  34          {  
+  35   1              b1=date/10000;
+  36   1              b2=date%10000/1000;
+  37   1              b3=date%1000/100;
+  38   1              b4=date%100/10;
+  39   1              b5=date%10;
+  40   1      
+  41   1         P0=table[b1];                //1
+  42   1         dula=1;
+  43   1         dula=0;
+  44   1      
+  45   1         P0=0xfe;
+  46   1         wela=1;
+  47   1         wela=0;
+  48   1         delay(5);
+  49   1      
+  50   1         dula=0;
+  51   1         P0=table[b2];                //2
+  52   1         dula=1;
+  53   1         dula=0;
+  54   1      
+  55   1         wela=0;
+C51 COMPILER V7.06   MAIN                                                                  01/07/2010 17:29:07 PAGE 2   
+
+  56   1         P0=0xfd;
+  57   1         wela=1;
+  58   1         wela=0;
+  59   1         delay(5);
+  60   1      
+  61   1         dula=0;
+  62   1         P0=table[b3];                //3
+  63   1         dula=1;
+  64   1         dula=0;
+  65   1      
+  66   1         wela=0;
+  67   1         P0=0xfb;
+  68   1         wela=1;
+  69   1         wela=0;
+  70   1         delay(5);
+  71   1              
+  72   1         dula=0;
+  73   1         P0=table[b4];                //4
+  74   1         dula=1;
+  75   1         dula=0;
+  76   1      
+  77   1         wela=0;
+  78   1         P0=0xf7;
+  79   1         wela=1;
+  80   1         wela=0;
+  81   1         delay(5);
+  82   1      
+  83   1         dula=0;
+  84   1         P0=table[b5];                //5
+  85   1         dula=1;
+  86   1         dula=0;
+  87   1      
+  88   1         wela=0;
+  89   1         P0=0xef;
+  90   1         wela=1;
+  91   1         wela=0;
+  92   1         delay(5);
+  93   1      
+  94   1      
+  95   1      
+  96   1      
+  97   1      }
+  98          
+  99          
+ 100          void main()             //      主程序
+ 101          {
+ 102   1              UART_init();
+ 103   1      
+ 104   1              while(1)
+ 105   1              {
+ 106   2      
+ 107   2                      for(i=0;i<20;i++)
+ 108   2                      {
+ 109   3                              display(dat);                   
+ 110   3                      }
+ 111   2              }
+ 112   1      }
+ 113          
+ 114          void serial() interrupt 4
+ 115          {
+ 116   1              if(RI)
+ 117   1              {       
+C51 COMPILER V7.06   MAIN                                                                  01/07/2010 17:29:07 PAGE 3   
+
+ 118   2                      flag++;
+ 119   2                      if(flag==1) {buf1=SBUF;}
+ 120   2                      if(flag==2)
+ 121   2                      {
+ 122   3                              buf2=SBUF;
+ 123   3                              dat=(buf1*256+buf2);
+ 124   3                              flag=0;
+ 125   3                      }
+ 126   2                      RI=0;
+ 127   2              }
+ 128   1      
+ 129   1      }
+ 130          
+ 131          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    342    ----
+   CONSTANT SIZE    =     16    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     16    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

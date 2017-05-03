@@ -1,0 +1,42 @@
+C51 COMPILER V7.06   MAIN                                                                  01/07/2010 17:34:21 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          #include<reg52.h>
+   2          #include"ad.h"
+   3          #include"da.h"
+   4          #define uchar unsigned char
+   5          
+   6          void delay(unsigned char i)
+   7          {
+   8   1        for(j=i;j>0;j--)
+   9   1          for(k=125;k>0;k--);
+  10   1      }
+  11          void main()
+  12          {
+  13   1              while(1)
+  14   1              {
+  15   2                      ad();
+  16   2                      da();
+  17   2              }
+  18   1      }
+  19          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    103    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      8    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

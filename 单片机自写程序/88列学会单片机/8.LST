@@ -1,0 +1,56 @@
+C51 COMPILER V7.06   8                                                                     07/24/2016 11:08:00 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE 8
+OBJECT MODULE PLACED IN 8.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE 8.C BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          //完成单片机以各端口地址的形式实现对8个LED灯依次从低到高位点亮的功能
+   2          #include<reg52.h>
+   3          sfr x = 0x90;   //x代表特殊功能寄存器0x90，编译时直接转成特殊功能寄存器,0x90是P1口
+   4          void ys(void)
+   5          {
+   6   1              unsigned char i,j;
+   7   1              for(i=0;i<250;i++)
+   8   1              for(j=0;j<250;j++)
+   9   1                              ;
+  10   1      }
+  11          
+  12          void main(void)
+  13          {
+  14   1              while(1)
+  15   1              {
+  16   2                      x = 0xfe;
+  17   2                              ys();
+  18   2                      x = 0xfd;
+  19   2                              ys();
+  20   2                      x = 0xfb;
+  21   2                              ys();
+  22   2                      x = 0xf7;
+  23   2                              ys();
+  24   2                      x = 0xef;
+  25   2                              ys();
+  26   2                      x = 0xdf;
+  27   2                              ys();
+  28   2                      x = 0xbf;
+  29   2                              ys();
+  30   2                      x = 0x7f;
+  31   2                              ys();
+  32   2              }
+  33   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     63    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,72 @@
+C51 COMPILER V7.06   41                                                                    07/27/2016 12:23:01 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE 41
+OBJECT MODULE PLACED IN 41.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE 41.C BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          //实现一个按键控制LED不同延时时间的功能
+   2          #include<reg52.h>
+   3          unsigned char ID;
+   4          sbit S1 = P3^7;
+   5          void ys()
+   6          {
+   7   1              unsigned char i,j;
+   8   1              for(i=0;i<200;i++)
+   9   1              for(j=0;j<100;j++)
+  10   1                      ;
+  11   1      }
+  12          
+  13          void main()
+  14          {
+  15   1              EA = 1;
+  16   1              ET0 = 1;
+  17   1              TR0 = 1;
+  18   1              TMOD = 0X01;
+  19   1              TH0 = 256-200;
+  20   1              TL0 = 256-200;
+  21   1              ID = 0;
+  22   1              while(1)
+  23   1              {
+  24   2                      switch(ID)
+  25   2                      {
+  26   3                              case 0 :P1=0XFE; break;
+  27   3                              case 1 :P1=0XFd; break;
+  28   3                              case 2 :P1=0XFb; break;
+  29   3                              case 3 :P1=0XF7; break; 
+  30   3                      }
+  31   2              }
+  32   1      }
+  33          
+  34          void time0(void) interrupt 1 using 1
+  35          {
+  36   1              TR0 = 0;
+  37   1              P3 = 0xff;
+  38   1              if(S1 == 0)
+  39   1              {
+  40   2                      ys();
+  41   2                      if(S1 == 0)
+  42   2                      ID++;
+  43   2              }
+  44   1              if(ID == 4)
+  45   1              ID = 0;
+  46   1              TR0 =1;
+  47   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    104    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+C51 COMPILER V7.06   41                                                                    07/27/2016 12:23:01 PAGE 2   
+
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

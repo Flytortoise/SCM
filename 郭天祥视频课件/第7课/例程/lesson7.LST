@@ -1,0 +1,71 @@
+C51 COMPILER V6.12  LESSON7                                                                11/11/2007 08:59:38 PAGE 1   
+
+
+C51 COMPILER V6.12, COMPILATION OF MODULE LESSON7
+OBJECT MODULE PLACED IN .\lesson7.OBJ
+COMPILER INVOKED BY: D:\Program files\keil\C51\BIN\C51.EXE .\lesson7.c DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          #include<reg52.h>
+   2          unsigned char flag,a;
+   3          void main()
+   4          {
+   5   1      
+   6   1      	TMOD=0x20;//设置定时器1为工作方式2
+   7   1      	TH1=0xfd;
+   8   1      	TL1=0xfd;
+   9   1      	TR1=1;
+  10   1      	REN=1;
+  11   1      	SM0=0;
+  12   1      	SM1=1;
+  13   1      	EA=1;
+  14   1      	ES=1;
+  15   1      	while(1)
+  16   1      		{
+  17   2      		/*	if(RI==1)
+  18   2      			{
+  19   2      			RI=0;
+  20   2      			P1=SBUF;
+  21   2      			}*/
+  22   2      			if(flag==1)
+  23   2      				{
+  24   3      					ES=0;
+  25   3      					flag=0;
+  26   3      					SBUF='1';//28;	
+  27   3      					while(!TI);	
+  28   3      					TI=0;
+  29   3      					SBUF='2';//28;	
+  30   3      					while(!TI);	
+  31   3      					TI=0;
+  32   3      					SBUF='3';//28;	
+  33   3      					while(!TI);	
+  34   3      					TI=0;
+  35   3      					ES=1;
+  36   3      				}
+  37   2      		}
+  38   1      }
+  39          
+  40          void ser() interrupt 4
+  41          {
+  42   1      	RI=0;
+  43   1      //	P1=SBUF;
+  44   1      	a=SBUF;
+  45   1      	flag=1;
+  46   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     68    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2    ----
+   IDATA SIZE       =   ----    ----
+C51 COMPILER V6.12  LESSON7                                                                11/11/2007 08:59:38 PAGE 2   
+
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

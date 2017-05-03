@@ -1,0 +1,70 @@
+C51 COMPILER V6.12  3_1                                                                    10/02/2007 13:27:13 PAGE 1   
+
+
+C51 COMPILER V6.12, COMPILATION OF MODULE 3_1
+OBJECT MODULE PLACED IN .\3_1.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\lesson3\3_1.c DEBUG OBJECTEXTEND PRINT(.\3_1.lst) OBJECT(.\3_1.obj) 
+
+stmt level    source
+
+   1          /*******************************************************************/
+   2          /* TX-1Cµ¥Æ¬»úÊµÑé°åÊµÑéÀý³Ì        							   */
+   3          /* 2007Äê8ÔÂµÚ¶þÆÚÅàÑµ°à¿ÎºóÏ°ÌâÏê½â							   */
+   4          /* ×÷Õß£º¹ùÌìÏé      											   */
+   5          /* ÓÊÏä£ºtxmcu@163.com 										  	   */
+   6          /* ÍøÕ¾£ºwww.txmcu.com(ÌìÏéµç×Ó)    							   */
+   7          /*¡¾°æÈ¨¡¿Copyright(C)ÌìÏéµç×Ó www.txmcu.com  All Rights Reserved  */
+   8          /*¡¾ÉùÃ÷¡¿´Ë³ÌÐò½öÓÃÓÚÑ§Ï°Óë²Î¿¼£¬ÒýÓÃÇë×¢Ã÷°æÈ¨ºÍ×÷ÕßÐÅÏ¢£¡       */
+   9          /*                                                                 */
+  10          /*******************************************************************/
+  11          /*                                                          
+  12          ÀûÓÃ¶¨Ê±/¼ÆÊýÆ÷T0´ÓP1.0Êä³öÖÜÆÚÎª1sµÄ·½²¨£¬
+  13          ÈÃ·¢¹â¶þ¼«¹ÜÒÔ1HZÉÁË¸£¬
+  14          Éè¾§ÕñÆµÂÊÎª12MHz¡££
+  15          */
+  16          /*********************************************************/
+  17          #include<reg52.h>  //52µ¥Æ¬»úÍ·ÎÄ¼þ
+  18          #include <intrins.h> //°üº¬ÓÐ×óÓÒÑ­»·ÒÆÎ»×Óº¯ÊýµÄ¿â
+  19          #define uint unsigned int    //ºê¶¨Òå
+  20          #define uchar unsigned char  //ºê¶¨Òå
+  21          sbit P1_0=P1^1;
+  22          uchar tt;
+  23          void main()		    //Ö÷º¯Êý
+  24          {
+  25   1      	TMOD=0x01;//ÉèÖÃ¶¨Ê±Æ÷0Îª¹¤×÷·½Ê½1
+  26   1      	TH0=(65536-50000)/256;
+  27   1      	TL0=(65536-50000)%256;
+  28   1      	EA=1;//¿ª×ÜÖÐ¶Ï
+  29   1      	ET0=1;//¿ª¶¨Ê±Æ÷0ÖÐ¶Ï
+  30   1      	TR0=1;//Æô¶¯¶¨Ê±Æ÷0
+  31   1      	while(1);//µÈ´ýÖÐ¶Ï²úÉú
+  32   1      	
+  33   1      }
+  34          
+  35          void timer0() interrupt 1
+  36          {
+  37   1      	TH0=(65536-50000)/256;
+  38   1      	TL0=(65536-50000)%256;
+  39   1      	tt++;
+  40   1      	if(tt==20)
+  41   1      	{
+  42   2      		tt=0;
+  43   2      		P1_0=~P1_0;
+  44   2      	}
+  45   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     44    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+C51 COMPILER V6.12  3_1                                                                    10/02/2007 13:27:13 PAGE 2   
+
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

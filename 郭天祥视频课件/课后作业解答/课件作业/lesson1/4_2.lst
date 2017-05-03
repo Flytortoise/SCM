@@ -1,0 +1,119 @@
+C51 COMPILER V6.12  4_2                                                                    10/03/2007 17:55:47 PAGE 1   
+
+
+C51 COMPILER V6.12, COMPILATION OF MODULE 4_2
+OBJECT MODULE PLACED IN .\4_2.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\lesson4\4_2.c DEBUG OBJECTEXTEND PRINT(.\4_2.lst) OBJECT(.\4_2.obj) 
+
+stmt level    source
+
+   1          /*******************************************************************/
+   2          /* TX-1C单片机实验板实验例程        							   */
+   3          /* 2007年8月第二期培训班课后习题详解							   */
+   4          /* 作者：郭天祥      											   */
+   5          /* 邮箱：txmcu@163.com 										  	   */
+   6          /* 网站：www.txmcu.com(天祥电子)    							   */
+   7          /*【版权】Copyright(C)天祥电子 www.txmcu.com  All Rights Reserved  */
+   8          /*【声明】此程序仅用于学习与参考，引用请注明版权和作者信息！       */
+   9          /*                                                                 */
+  10          /*******************************************************************/
+  11          /*                                                          
+  12          用动态扫描方法和定时器1在数码管的前三位显示出秒表，
+  13          精确到1%秒，即最后一位显示1%秒，一直循环下去
+  14          设时钟频率为12M
+  15          */
+  16          /*********************************************************/
+  17          #include<reg52.h>  //52单片机头文件
+  18          #include <intrins.h> //包含有左右循环移位子函数的库
+  19          #define uint unsigned int    //宏定义
+  20          #define uchar unsigned char  //宏定义
+  21          sbit dula=P2^6;       //数码管段选锁存端
+  22          sbit wela=P2^7;       ////数码管位选锁存端
+  23          uchar ge,shi,bai;
+  24          uint tt;
+  25          uchar code table[]={
+  26          0x3f,0x06,0x5b,0x4f,
+  27          0x66,0x6d,0x7d,0x07,
+  28          0x7f,0x6f,0x77,0x7c,
+  29          0x39,0x5e,0x79,0x71};
+  30          void display(uchar,uchar,uchar); //函数声明
+  31          void delay(uint);
+  32          void main()
+  33          {
+  34   1      	TMOD=0x10;//设置定时器1为工作方式1
+  35   1      	TH1=(65536-10000)/256;
+  36   1      	TL1=(65536-10000)%256;
+  37   1      	EA=1;//开总中断
+  38   1      	ET1=1;//开定时器1中断
+  39   1      	TR1=1;//启动定时器1
+  40   1      	while(1)
+  41   1      	{
+  42   2      		display(bai,shi,ge);
+  43   2      	}
+  44   1      }
+  45          
+  46          
+  47          void exter0() interrupt 3   // 定时器0中断
+  48          {
+  49   1      	TH1=(65536-10000)/256;
+  50   1      	TL1=(65536-10000)%256;
+  51   1      	tt++;
+  52   1      	if(tt==1000)
+  53   1      	tt=0;
+  54   1      	bai=tt/100;
+  55   1      	shi=tt%100/10;
+C51 COMPILER V6.12  4_2                                                                    10/03/2007 17:55:47 PAGE 2   
+
+  56   1      	ge=tt%10;
+  57   1      }
+  58          
+  59          void display(uchar one,uchar two,uchar three)
+  60          {
+  61   1              dula=1;
+  62   1      		P0=table[one];   //送段数据
+  63   1      		dula=0;
+  64   1      		P0=0xff;		//送位数据前关闭所有显示，防止打开位选锁存后段选数据通过位选锁存器
+  65   1      		wela=1;
+  66   1      		P0=0xfe;
+  67   1      		wela=0;
+  68   1      		delay(1);
+  69   1      
+  70   1      		dula=1;
+  71   1      		P0=table[two];
+  72   1      		dula=0;
+  73   1      		P0=0xff;
+  74   1      		wela=1;
+  75   1      		P0=0xfd;
+  76   1      		wela=0;
+  77   1      		delay(1);
+  78   1      
+  79   1      		dula=1;
+  80   1      		P0=table[three];
+  81   1      		dula=0;
+  82   1      		P0=0xff;
+  83   1      		wela=1;
+  84   1      		P0=0xfb;
+  85   1      		wela=0;
+  86   1      		delay(1);
+  87   1      }
+  88          
+  89          void delay(uint z)       //延时子函数
+  90          {
+  91   1      	uint x,y;
+  92   1      	for(x=z;x>0;x--)
+  93   1      		for(y=110;y>0;y--);
+  94   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    250    ----
+   CONSTANT SIZE    =     16    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      5       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

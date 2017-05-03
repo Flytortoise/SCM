@@ -1,0 +1,245 @@
+BL51 BANKED LINKER/LOCATER V5.03                                                        01/07/2010  17:29:07  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V5.03, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE main.obj TO Display_UART RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?UIDIV)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  Display_UART (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0010H     UNIT         ?DT?MAIN
+            IDATA   0018H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0019H     UNIT         ?PR?UART_INIT?MAIN
+                    001CH     0007H                  *** GAP ***
+            CODE    0023H     0003H     ABSOLUTE     
+            CODE    0026H     00CCH     UNIT         ?PR?_DISPLAY?MAIN
+            CODE    00F2H     008CH     UNIT         ?C_C51STARTUP
+            CODE    017EH     0055H     UNIT         ?C?LIB_CODE
+            CODE    01D3H     0045H     UNIT         ?PR?SERIAL?MAIN
+            CODE    0218H     0018H     UNIT         ?PR?MAIN?MAIN
+            CODE    0230H     0014H     UNIT         ?PR?_DELAY?MAIN
+            CODE    0244H     0010H     UNIT         ?CO?MAIN
+            CODE    0254H     0008H     UNIT         ?C_INITSEG
+
+
+
+OVERLAY MAP OF MODULE:   Display_UART (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN
+  +--> ?PR?UART_INIT?MAIN
+  +--> ?PR?_DISPLAY?MAIN
+
+?PR?_DISPLAY?MAIN
+  +--> ?CO?MAIN
+  +--> ?PR?_DELAY?MAIN
+BL51 BANKED LINKER/LOCATER V5.03                                                      01/07/2010  17:29:07  PAGE 2
+
+
+
+
+
+SYMBOL TABLE OF MODULE:  Display_UART (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  C:01D3H         PUBLIC        serial
+  B:00A8H.7       PUBLIC        EA
+  C:0244H         PUBLIC        table
+  D:00A8H         PUBLIC        IE
+  D:0008H         PUBLIC        b1
+  D:0009H         PUBLIC        b2
+  D:000AH         PUBLIC        b3
+  D:000BH         PUBLIC        b4
+  D:000CH         PUBLIC        b5
+  D:000DH         PUBLIC        b6
+  B:00A8H.4       PUBLIC        ES
+  D:00B8H         PUBLIC        IP
+  B:0098H.0       PUBLIC        RI
+  D:000EH         PUBLIC        flag
+  D:000FH         PUBLIC        date
+  C:0218H         PUBLIC        main
+  B:00A0H.6       PUBLIC        dula
+  B:00A0H.7       PUBLIC        wela
+  D:0099H         PUBLIC        SBUF
+  D:0087H         PUBLIC        PCON
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  D:0088H         PUBLIC        TCON
+  D:0010H         PUBLIC        dat
+  D:008DH         PUBLIC        TH1
+  B:0098H.7       PUBLIC        SM0
+  B:0098H.6       PUBLIC        SM1
+  D:008BH         PUBLIC        TL1
+  C:0003H         PUBLIC        UART_init
+  B:0088H.6       PUBLIC        TR1
+  C:0026H         PUBLIC        _display
+  D:0012H         PUBLIC        a
+  B:0098H.4       PUBLIC        REN
+  D:00C8H         PUBLIC        T2CON
+  D:0013H         PUBLIC        i
+  D:0014H         PUBLIC        buf1
+  D:0016H         PUBLIC        buf2
+  C:0236H         PUBLIC        _delay
+  D:00D0H         PUBLIC        PSW
+  C:0230H         SYMBOL        L?0021
+  -------         PROC          L?0020
+  -------         ENDPROC       L?0020
+  C:0230H         SYMBOL        L?0021
+BL51 BANKED LINKER/LOCATER V5.03                                                      01/07/2010  17:29:07  PAGE 3
+
+
+  -------         PROC          _DELAY
+  D:0007H         SYMBOL        i
+  -------         DO            
+  D:0007H         SYMBOL        j
+  D:0006H         SYMBOL        k
+  -------         ENDDO         
+  C:0236H         LINE#         13
+  C:0236H         LINE#         14
+  C:0236H         LINE#         16
+  C:023CH         LINE#         17
+  C:0243H         LINE#         18
+  -------         ENDPROC       _DELAY
+  -------         PROC          UART_INIT
+  C:0003H         LINE#         19
+  C:0003H         LINE#         20
+  C:0003H         LINE#         21
+  C:0006H         LINE#         22
+  C:0009H         LINE#         23
+  C:000CH         LINE#         24
+  C:000EH         LINE#         25
+  C:0010H         LINE#         26
+  C:0012H         LINE#         27
+  C:0014H         LINE#         28
+  C:0016H         LINE#         29
+  C:0018H         LINE#         30
+  C:001BH         LINE#         31
+  -------         ENDPROC       UART_INIT
+  -------         PROC          _DISPLAY
+  D:0002H         SYMBOL        date
+  C:0026H         LINE#         33
+  C:002AH         LINE#         34
+  C:002AH         LINE#         35
+  C:0033H         LINE#         36
+  C:004DH         LINE#         37
+  C:0067H         LINE#         38
+  C:0081H         LINE#         39
+  C:008EH         LINE#         41
+  C:0096H         LINE#         42
+  C:0098H         LINE#         43
+  C:009AH         LINE#         45
+  C:009DH         LINE#         46
+  C:009DH         LINE#         47
+  C:009DH         LINE#         48
+  C:00A0H         LINE#         50
+  C:00A2H         LINE#         51
+  C:00A7H         LINE#         52
+  C:00A9H         LINE#         53
+  C:00ABH         LINE#         55
+  C:00ADH         LINE#         56
+  C:00B0H         LINE#         57
+  C:00B0H         LINE#         58
+  C:00B0H         LINE#         59
+  C:00B3H         LINE#         61
+  C:00B5H         LINE#         62
+  C:00BAH         LINE#         63
+  C:00BCH         LINE#         64
+  C:00BEH         LINE#         66
+BL51 BANKED LINKER/LOCATER V5.03                                                      01/07/2010  17:29:07  PAGE 4
+
+
+  C:00C0H         LINE#         67
+  C:00C3H         LINE#         68
+  C:00C3H         LINE#         69
+  C:00C3H         LINE#         70
+  C:00C6H         LINE#         72
+  C:00C8H         LINE#         73
+  C:00CDH         LINE#         74
+  C:00CFH         LINE#         75
+  C:00D1H         LINE#         77
+  C:00D3H         LINE#         78
+  C:00D6H         LINE#         79
+  C:00D6H         LINE#         80
+  C:00D6H         LINE#         81
+  C:00D9H         LINE#         83
+  C:00DBH         LINE#         84
+  C:00E0H         LINE#         85
+  C:00E2H         LINE#         86
+  C:00E4H         LINE#         88
+  C:00E6H         LINE#         89
+  C:00E9H         LINE#         90
+  C:00EBH         LINE#         91
+  C:00EDH         LINE#         92
+  -------         ENDPROC       _DISPLAY
+  -------         PROC          MAIN
+  C:0218H         LINE#         100
+  C:0218H         LINE#         101
+  C:0218H         LINE#         102
+  C:021BH         LINE#         104
+  C:021BH         LINE#         105
+  C:021BH         LINE#         107
+  C:021EH         LINE#         108
+  C:021EH         LINE#         109
+  C:0225H         LINE#         110
+  -------         ENDPROC       MAIN
+  -------         PROC          SERIAL
+  C:01D3H         LINE#         114
+  C:01DEH         LINE#         116
+  C:01E1H         LINE#         117
+  C:01E1H         LINE#         118
+  C:01E3H         LINE#         119
+  C:01EFH         LINE#         120
+  C:01F4H         LINE#         121
+  C:01F4H         LINE#         122
+  C:01FBH         LINE#         123
+  C:020AH         LINE#         124
+  C:020DH         LINE#         125
+  C:020DH         LINE#         126
+  C:020FH         LINE#         127
+  C:020FH         LINE#         129
+  -------         ENDPROC       SERIAL
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        ?C?UIDIV
+  C:017EH         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+Program Size: data=25.0 xdata=0 code=597
+BL51 BANKED LINKER/LOCATER V5.03                                                      01/07/2010  17:29:07  PAGE 5
+
+
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

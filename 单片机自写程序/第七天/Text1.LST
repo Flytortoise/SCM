@@ -1,0 +1,73 @@
+C51 COMPILER V7.06   TEXT1                                                                 07/23/2016 15:35:01 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE TEXT1
+OBJECT MODULE PLACED IN Text1.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE Text1.C BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          #include<reg52.h>
+   2          #include <intrins.h>
+   3          #define uint unsigned int    //宏定义
+   4          #define uchar unsigned char  //宏定义
+   5          sbit dula=P2^6;         //申明U1锁存器的锁存端
+   6          sbit wela=P2^7;         //申明U2锁存器的锁存端
+   7          sbit adwr=P3^6;         //定义AD的WR端口
+   8          sbit adrd=P3^7;         //定义AD的RD端口
+   9          uchar adval;
+  10          void delay(uint z)     //延时子函数
+  11          {
+  12   1              uint x,y;
+  13   1              for(x=z;x>0;x--)
+  14   1                      for(y=110;y>0;y--);
+  15   1      }
+  16          void main()
+  17          {
+  18   1              wela=1;
+  19   1              P0=0x7f;           //置CSAD为0，选通ADCS 以后不必再管ADCS
+  20   1              wela=0;
+  21   1              TMOD=0x20;//设置定时器1为工作方式2
+  22   1              TH1=0xe8; //波特率设置为1200
+  23   1              TL1=0xe8;
+  24   1              TR1=1;
+  25   1              SM0=0;
+  26   1              SM1=1;
+  27   1              REN=1;
+  28   1              while(1)
+  29   1              {
+  30   2                      adwr=1;
+  31   2                      _nop_();
+  32   2                      adwr=0;                 //启动AD转换
+  33   2                      _nop_();
+  34   2                      adwr=1;
+  35   2                      delay(500);
+  36   2                      P1=0xff;                    //读取P1口之前先给其写全1 
+  37   2                      adrd=1;                    //选通ADCS
+  38   2                      _nop_();        
+  39   2                      adrd=0;                     //AD读使能
+  40   2                      _nop_();
+  41   2                      adval=P1;                       //AD数据读取赋给P1口
+  42   2                      delay(500);
+  43   2                      SBUF=adval;
+  44   2                      while(!TI);
+  45   2                      TI=0;
+  46   2                      
+  47   2              }
+  48   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     98    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+C51 COMPILER V7.06   TEXT1                                                                 07/23/2016 15:35:01 PAGE 2   
+
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,47 @@
+C51 COMPILER V7.06   11                                                                    07/24/2016 12:18:22 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE 11
+OBJECT MODULE PLACED IN 11.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE 11.C BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          //完成8个LED灯的按二进制加法依次变化的功能
+   2          #include<reg52.h>
+   3          void ys(void)
+   4          {
+   5   1              unsigned char m,n;
+   6   1              for(m=0;m<100;m++)
+   7   1              for(n=0;n<200;n++)
+   8   1                      ;
+   9   1      }
+  10          
+  11          void main(void)
+  12          {
+  13   1              unsigned char i;
+  14   1              while(1)
+  15   1              {
+  16   2                      i = 0;
+  17   2                      while (1)
+  18   2                      {
+  19   3                              P1 = i;
+  20   3                              ys();
+  21   3                              i++;
+  22   3                      }
+  23   2              }
+  24   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     23    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

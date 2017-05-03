@@ -1,0 +1,51 @@
+C51 COMPILER V7.06   课_笞饕_4                                                             07/11/2016 17:44:48 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE 课_笞饕_4
+OBJECT MODULE PLACED IN 课后作业4.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE 课后作业4.C BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          #include<reg52.h>
+   2          #include <intrins.h>
+   3          
+   4          typedef unsigned int uint;
+   5          typedef unsigned char uchar;
+   6          void relay()
+   7          {
+   8   1              uint i;
+   9   1              for(i=0;i<18500;i++)
+  10   1                      ;       
+  11   1      }               //100ms 的延迟
+  12          
+  13          void main()
+  14          {
+  15   1              while(1)
+  16   1              {
+  17   2                      uint k,a=0xff;
+  18   2                      for(;a>=0;a--)
+  19   2                      {
+  20   3                              for(k=10;k>0;k--)
+  21   3                              relay();
+  22   3                              P1=a;
+  23   3                      }
+  24   2                      
+  25   2                      while(1);
+  26   2              }
+  27   1      }
+  28          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     69    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       4
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

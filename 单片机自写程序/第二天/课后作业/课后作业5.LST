@@ -1,0 +1,92 @@
+C51 COMPILER V7.06   ¿Î_ó×÷Ò_5                                                             07/11/2016 18:00:49 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE ¿Î_ó×÷Ò_5
+OBJECT MODULE PLACED IN ¿Îºó×÷Òµ5.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE ¿Îºó×÷Òµ5.c BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          #include<reg52.h>
+   2          #include <intrins.h>
+   3          sbit D0=P1^0;
+   4          sbit DEEP=P2^3;
+   5          typedef unsigned int uint;
+   6          typedef unsigned char uchar;
+   7          void relay()
+   8          {
+   9   1              uint i;
+  10   1              for(i=0;i<18500;i++)
+  11   1                      ;       
+  12   1      }               //100ms µÄÑÓ³Ù
+  13          
+  14          void main()
+  15          {
+  16   1              while(1)
+  17   1              {
+  18   2                      uint k,j,i,b;
+  19   2                      uchar a=0xfe;
+  20   2                      for(b=0;b<5;b++)
+  21   2                      {
+  22   3                              for(i=0;i<2;i++)
+  23   3                              {
+  24   4                                      
+  25   4                                      for(k=8;k>1;k--)
+  26   4                                      {       P1=a;
+  27   5                                      
+  28   5                                              for(j=0;j<2;j++)
+  29   5                                              relay();
+  30   5                                              P1=0xff;
+  31   5                                              
+  32   5                                              for(j=0;j<2;j++)
+  33   5                                              relay();
+  34   5                                              a=_crol_(a,1);          //Ñ­»·×óÒÆ
+  35   5                                      }
+  36   4                                      //a=0x7f;
+  37   4                                      for(k=8;k>1;k--)
+  38   4                                      {       P1=a;
+  39   5                              
+  40   5                                              for(j=0;j<2;j++)
+  41   5                                              relay();
+  42   5                                              P1=0xff;
+  43   5                                      
+  44   5                                              for(j=0;j<2;j++)
+  45   5                                              relay();
+  46   5                                              a=_cror_(a,1);          //Ñ­»·ÓÒÒÆ
+  47   5                                      }
+  48   4                              }
+  49   3                              P1=a;
+  50   3                              for(j=0;j<2;j++)
+  51   3                                      relay();
+  52   3                              P1=0xff;
+  53   3                                      
+  54   3                              for(i=0;i<5;i++)
+  55   3                              {
+C51 COMPILER V7.06   ¿Î_ó×÷Ò_5                                                             07/11/2016 18:00:49 PAGE 2   
+
+  56   4                                      for(j=0;j<3;j++)
+  57   4                                              relay();
+  58   4                                      P1=0X00;
+  59   4                                      for(j=0;j<3;j++)
+  60   4                                              relay();
+  61   4                                      P1=0XFF;
+  62   4                              }
+  63   3                      }
+  64   2                      while(1);
+  65   2              }
+  66   1      }
+  67          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    366    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       9
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

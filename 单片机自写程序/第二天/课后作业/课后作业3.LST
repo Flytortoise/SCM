@@ -1,0 +1,75 @@
+C51 COMPILER V7.06   ¿Î_ó×÷Ò_3                                                             07/11/2016 17:34:20 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE ¿Î_ó×÷Ò_3
+OBJECT MODULE PLACED IN ¿Îºó×÷Òµ3.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE ¿Îºó×÷Òµ3.C BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          #include<reg52.h>
+   2          #include <intrins.h>
+   3          sbit D0=P1^0;
+   4          sbit DEEP=P2^3;
+   5          typedef unsigned int uint;
+   6          typedef unsigned char uchar;
+   7          void relay()
+   8          {
+   9   1              uint i;
+  10   1              for(i=0;i<18500;i++)
+  11   1                      ;       
+  12   1      }               //100ms µÄÑÓ³Ù
+  13          
+  14          void main()
+  15          {
+  16   1              while(1)
+  17   1              {
+  18   2                      uint k,j,i;
+  19   2                      for(i=0;i<8;i++)
+  20   2                      {
+  21   3                              uchar a=0xfe;
+  22   3                              for(k=8;k>0;k--)
+  23   3                              {       P1=a;
+  24   4                                      DEEP=0;
+  25   4                                      //for(j=0;j<5;j++)
+  26   4                                      relay();
+  27   4                                      P1=0xff;
+  28   4                                      DEEP=1;
+  29   4                                      //for(j=0;j<5;j++)
+  30   4                                      relay();
+  31   4                                      a=_crol_(a,1);          //Ñ­»·×óÒÆ
+  32   4                              }
+  33   3                              a=0x7f;
+  34   3                              for(k=8;k>0;k--)
+  35   3                              {       P1=a;
+  36   4                                      DEEP=0;
+  37   4                                      //for(j=0;j<5;j++)
+  38   4                                      relay();
+  39   4                                      P1=0xff;
+  40   4                                      DEEP=1;
+  41   4                                      //for(j=0;j<5;j++)
+  42   4                                      relay();
+  43   4                                      a=_cror_(a,1);          //Ñ­»·ÓÒÒÆ
+  44   4                              }
+  45   3                      }
+  46   2                      while(1);
+  47   2              }
+  48   1      }
+*** WARNING C280 IN LINE 18 OF ¿Îºó×÷Òµ3.C: 'j': unreferenced local variable
+  49          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    140    ----
+   CONSTANT SIZE    =   ----    ----
+C51 COMPILER V7.06   ¿Î_ó×÷Ò_3                                                             07/11/2016 17:34:20 PAGE 2   
+
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       7
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

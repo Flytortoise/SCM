@@ -1,0 +1,42 @@
+C51 COMPILER V7.06   2                                                                     07/24/2016 00:10:53 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE 2
+OBJECT MODULE PLACED IN 2.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE 2.C BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          //实现单个LED灯的闪烁
+   2          #include<reg52.h>
+   3          void Ys(void)
+   4          {
+   5   1              unsigned int a;
+   6   1              for(a=0;a<10000;a++);
+   7   1      }
+   8          
+   9          void main(void)
+  10          {
+  11   1              while(1)
+  12   1              {
+  13   2                      P1=0XFE;
+  14   2                      Ys();
+  15   2                      P1=0XFF;
+  16   2                      Ys();
+  17   2              }
+  18   1      
+  19   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     29    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

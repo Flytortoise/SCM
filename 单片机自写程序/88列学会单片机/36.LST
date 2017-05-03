@@ -1,0 +1,36 @@
+C51 COMPILER V7.06   36                                                                    07/26/2016 11:20:56 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE 36
+OBJECT MODULE PLACED IN 36.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE 36.c BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          //独立式键盘控制，实现按下S1后点亮一个LED
+   2          #include<reg52.h>
+   3          sbit S1 = P3^7;
+   4          sbit LED = P1^0;
+   5          void main()
+   6          {
+   7   1              LED = 0;
+   8   1              while(1)
+   9   1              {
+  10   2                      if(S1==0)
+  11   2                      LED = !LED;
+  12   2              }
+  13   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =      9    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

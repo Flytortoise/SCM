@@ -1,0 +1,61 @@
+C51 COMPILER V7.06   6                                                                     07/24/2016 10:46:05 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE 6
+OBJECT MODULE PLACED IN 6.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE 6.C BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          //完成8个LED灯左右循环一次变化的功能
+   2          #include<reg52.h>
+   3          unsigned char i;
+   4          unsigned char temp;
+   5          unsigned char a,b;
+   6          
+   7          void ys(void)
+   8          {
+   9   1              unsigned char m,n,s;
+  10   1              for(m=20;m>0;m--)
+  11   1              for(n=20;n>0;n--)
+  12   1              for(s=248;s>0;s--)
+  13   1                      ;
+  14   1      }
+  15          
+  16          void main(void)
+  17          {
+  18   1              while(1)
+  19   1              {
+  20   2                      temp=0xfe;
+  21   2                      P1=temp;
+  22   2                      ys();
+  23   2                      for(i=1;i<8;i++)
+  24   2                      {
+  25   3                              a = temp << i;  
+  26   3                              b = temp >> (8-i);
+  27   3                              P1 = a|b;
+  28   3                              ys();
+  29   3                      }
+  30   2                      for(i=1;i<8;i++)
+  31   2                      {
+  32   3                              a = temp >> i;
+  33   3                              b = temp << (8-i);
+  34   3                              P1 = a|b;
+  35   3                              ys();
+  36   3                      }
+  37   2              }
+  38   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    124    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      4    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

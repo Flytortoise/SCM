@@ -1,0 +1,190 @@
+BL51 BANKED LINKER/LOCATER V5.03                                                        07/13/2016  22:35:28  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V5.03, INVOKED BY:
+D:\KEIL\C51\BIN\BL51.EXE 作业3.obj TO 作业3。1 RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  作业3.obj (作襙3)
+  D:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  D:\KEIL\C51\LIB\C51S.LIB (?C?SLDIV)
+  D:\KEIL\C51\LIB\C51S.LIB (?C?ULDIV)
+
+
+LINK MAP OF MODULE:  作业3。1 (作襙3)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0008H     UNIT         ?DT?作襙3
+            IDATA   0010H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     0008H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+            CODE    000EH     000CH     UNIT         ?C_C51STARTUP
+                    001AH     0001H                  *** GAP ***
+            CODE    001BH     0003H     ABSOLUTE     
+            CODE    001EH     0178H     UNIT         ?PR?TIME0?作襙3
+            CODE    0196H     00CEH     UNIT         ?C?LIB_CODE
+            CODE    0264H     0044H     UNIT         ?C?LDIV
+            CODE    02A8H     002BH     UNIT         ?PR?TIME1?作襙3
+            CODE    02D3H     0028H     UNIT         ?PR?MAIN?作襙3
+
+
+
+OVERLAY MAP OF MODULE:   作业3。1 (作襙3)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?作襙3
+
+
+
+SYMBOL TABLE OF MODULE:  作业3。1 (作襙3)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        作襙3
+  C:0000H         SYMBOL        _ICE_DUMMY_
+BL51 BANKED LINKER/LOCATER V5.03                                                      07/13/2016  22:35:28  PAGE 2
+
+
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  B:00A8H.7       PUBLIC        EA
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  B:0090H.3       PUBLIC        DEEP
+  C:02D3H         PUBLIC        main
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  D:0088H         PUBLIC        TCON
+  B:00A8H.1       PUBLIC        ET0
+  B:00A8H.3       PUBLIC        ET1
+  D:008CH         PUBLIC        TH0
+  D:008DH         PUBLIC        TH1
+  D:008AH         PUBLIC        TL0
+  D:008BH         PUBLIC        TL1
+  B:0088H.4       PUBLIC        TR0
+  B:0088H.6       PUBLIC        TR1
+  C:001EH         PUBLIC        time0
+  C:02A8H         PUBLIC        time1
+  D:00C8H         PUBLIC        T2CON
+  D:0008H         PUBLIC        i
+  D:000AH         PUBLIC        j
+  D:000CH         PUBLIC        k
+  D:000EH         PUBLIC        t
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          MAIN
+  C:02D3H         LINE#         8
+  C:02D3H         LINE#         9
+  C:02D3H         LINE#         10
+  C:02D8H         LINE#         11
+  C:02DCH         LINE#         12
+  C:02E0H         LINE#         13
+  C:02E2H         LINE#         14
+  C:02E4H         LINE#         15
+  C:02E6H         LINE#         16
+  C:02E8H         LINE#         17
+  C:02EAH         LINE#         18
+  C:02EDH         LINE#         20
+  C:02F0H         LINE#         21
+  C:02F3H         LINE#         22
+  C:02F6H         LINE#         23
+  C:02F9H         LINE#         24
+  -------         ENDPROC       MAIN
+  -------         PROC          TIME1
+  C:02A8H         LINE#         27
+  C:02ACH         LINE#         29
+  C:02AFH         LINE#         30
+  C:02B2H         LINE#         31
+  C:02BAH         LINE#         32
+  C:02C2H         LINE#         33
+  C:02C2H         LINE#         34
+  C:02C8H         LINE#         35
+  C:02CEH         LINE#         36
+  C:02CEH         LINE#         37
+  -------         ENDPROC       TIME1
+  -------         PROC          TIME0
+BL51 BANKED LINKER/LOCATER V5.03                                                      07/13/2016  22:35:28  PAGE 3
+
+
+  C:001EH         LINE#         38
+  C:003BH         LINE#         40
+  C:005EH         LINE#         41
+  C:0083H         LINE#         42
+  C:008BH         LINE#         43
+  C:0096H         LINE#         44
+  C:0096H         LINE#         45
+  C:009CH         LINE#         46
+  C:009CH         LINE#         47
+  C:00A2H         LINE#         48
+  C:00A8H         LINE#         49
+  C:00AAH         LINE#         51
+  C:00AAH         LINE#         52
+  C:00AAH         LINE#         53
+  C:00BFH         LINE#         54
+  C:00BFH         LINE#         55
+  C:00C5H         LINE#         56
+  C:00CBH         LINE#         57
+  C:00CDH         LINE#         59
+  C:00CDH         LINE#         60
+  C:00E2H         LINE#         61
+  C:00E2H         LINE#         62
+  C:00E8H         LINE#         63
+  C:00EAH         LINE#         65
+  C:00EAH         LINE#         66
+  C:00FFH         LINE#         67
+  C:00FFH         LINE#         68
+  C:0105H         LINE#         69
+  C:0107H         LINE#         71
+  C:0107H         LINE#         72
+  C:011CH         LINE#         73
+  C:011CH         LINE#         74
+  C:0122H         LINE#         75
+  C:0124H         LINE#         77
+  C:0124H         LINE#         78
+  C:0139H         LINE#         79
+  C:0139H         LINE#         80
+  C:013FH         LINE#         81
+  C:0141H         LINE#         83
+  C:0141H         LINE#         84
+  C:0156H         LINE#         85
+  C:0156H         LINE#         86
+  C:015CH         LINE#         87
+  C:015EH         LINE#         89
+  C:015EH         LINE#         90
+  C:0173H         LINE#         91
+  C:0173H         LINE#         92
+  C:0179H         LINE#         93
+  C:017BH         LINE#         95
+  C:017BH         LINE#         97
+  -------         ENDPROC       TIME0
+  -------         ENDMOD        作襙3
+
+  -------         MODULE        ?C?SLDIV
+  C:0264H         PUBLIC        ?C?SLDIV
+  -------         ENDMOD        ?C?SLDIV
+
+BL51 BANKED LINKER/LOCATER V5.03                                                      07/13/2016  22:35:28  PAGE 4
+
+
+  -------         MODULE        ?C?ULDIV
+  C:01D2H         PUBLIC        ?C?ULDIV
+  -------         ENDMOD        ?C?ULDIV
+
+Program Size: data=17.0 xdata=0 code=754
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,76 @@
+C51 COMPILER V7.06   LESSON5_2                                                             01/02/2016 20:58:23 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE LESSON5_2
+OBJECT MODULE PLACED IN lesson5_2.OBJ
+COMPILER INVOKED BY: d:\prg\Keil\C51\BIN\C51.EXE lesson5_2.c DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          #include<reg52.h>
+   2          #define uint unsigned int
+   3          #define uchar unsigned char
+   4          sbit d1=P1^0;
+   5          sbit dula=P2^6;
+   6          sbit wela=P2^7;
+   7          sbit key1=P3^4;
+   8          uchar code table[]={
+   9          0x3f,0x06,0x5b,0x4f,
+  10          0x66,0x6d,0x7d,0x07,
+  11          0x7f,0x6f,0x77,0x7c,
+  12          0x39,0x5e,0x79,0x71};
+  13          uchar num;
+  14          
+  15          void delay(uint z)
+  16          {
+  17   1              uint x,y;
+  18   1              for(x=z;x>0;x--)
+  19   1                      for(y=110;y>0;y--);
+  20   1      }
+  21          void main()
+  22          {
+  23   1              wela=1;
+  24   1              P0=0xfe;
+  25   1              wela=0;
+  26   1      
+  27   1              P3=0xff;
+  28   1              while(1)
+  29   1                      {
+  30   2                              if(key1==0)
+  31   2                                      {
+  32   3                                              delay(5);
+  33   3                                              if(key1==0)
+  34   3                                              {
+  35   4                                                      d1=0;
+  36   4                                                      num++;
+  37   4                                                      if(num==10)
+  38   4                                                              num=0;
+  39   4                                              }
+  40   3                                              while(!key1);
+  41   3                                              delay(5);
+  42   3                                              while(!key1);
+  43   3                                      }
+  44   2                              else
+  45   2                                      d1=1;
+  46   2      
+  47   2                              dula=1;
+  48   2                              P0=table[num];
+  49   2                              dula=0; 
+  50   2                      }
+  51   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     96    ----
+C51 COMPILER V7.06   LESSON5_2                                                             01/02/2016 20:58:23 PAGE 2   
+
+   CONSTANT SIZE    =     16    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

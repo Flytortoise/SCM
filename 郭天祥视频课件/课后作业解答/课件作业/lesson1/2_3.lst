@@ -1,0 +1,79 @@
+C51 COMPILER V6.12  2_3                                                                    09/30/2007 20:58:00 PAGE 1   
+
+
+C51 COMPILER V6.12, COMPILATION OF MODULE 2_3
+OBJECT MODULE PLACED IN .\2_3.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\lesson2\2_3.c DEBUG OBJECTEXTEND PRINT(.\2_3.lst) OBJECT(.\2_3.obj) 
+
+stmt level    source
+
+   1          /*******************************************************************/
+   2          /* TX-1C单片机实验板实验例程        							   */
+   3          /* 2007年8月第二期培训班课后习题详解							   */
+   4          /* 作者：郭天祥      											   */
+   5          /* 邮箱：txmcu@163.com 										  	   */
+   6          /* 网站：www.txmcu.com(天祥电子)    							   */
+   7          /* 题目内容：用位操作点亮第一个发光管.  						   */
+   8          /*【版权】Copyright(C)天祥电子 www.txmcu.com  All Rights Reserved  */
+   9          /*【声明】此程序仅用于学习与参考，引用请注明版权和作者信息！       */
+  10          /*                                                                 */
+  11          /*******************************************************************/
+  12          /*                                                          
+  13          8个发光管来回流动，
+  14          每个管亮100ms,流动时让蜂鸣器发出"滴滴"声。
+  15          */
+  16          /*********************************************************/
+  17          #include<reg52.h>  //52单片机头文件
+  18          #include <intrins.h> //包含有左右循环移位子函数的库
+  19          #define uint unsigned int    //宏定义
+  20          #define uchar unsigned char  //宏定义
+  21          sbit beep=P2^3;
+  22          void delay(uint z)  //延时函数,z的取值为这个函数的延时ms数，如delay(200);大约延时200ms.
+  23          {					//delay(500);大约延时500ms.
+  24   1      	uint x,y;
+  25   1      	for(x=z;x>0;x--)
+  26   1      		for(y=110;y>0;y--);	
+  27   1      }
+  28          void main()		    //主函数
+  29          {
+  30   1      	uchar a,i;
+  31   1      	while(1)        //大循环
+  32   1      	{
+  33   2      		a=0xfe;
+  34   2      		for(i=0;i<8;i++)   //左移
+  35   2      		{
+  36   3      			P1=a;       //点亮小灯
+  37   3      			beep=0;     //开启蜂鸣器
+  38   3      			delay(50); //延时100毫秒
+  39   3      			beep=1;     //关闭蜂鸣器
+  40   3      			delay(50);
+  41   3      			a=_crol_(a,1); //将a变量循环左移一位
+  42   3      		}
+  43   2      		a=0x7f;
+  44   2      		for(i=0;i<8;i++)  //右移
+  45   2      		{
+  46   3      			P1=a;       //点亮小灯
+  47   3      			beep=0;     //开启蜂鸣器
+  48   3      			delay(50); //延时100毫秒
+  49   3      			beep=1;     //关闭蜂鸣器
+  50   3      			delay(50);
+  51   3      			a=_cror_(a,1); //将a变量循环左移一位
+  52   3      		}		
+  53   2      	}
+  54   1      }
+
+C51 COMPILER V6.12  2_3                                                                    09/30/2007 20:58:00 PAGE 2   
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     98    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

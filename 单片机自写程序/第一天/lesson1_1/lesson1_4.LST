@@ -1,0 +1,28 @@
+C51 COMPILER V7.06   LESSON1_4                                                             07/08/2016 21:09:12 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE LESSON1_4
+OBJECT MODULE PLACED IN lesson1_4.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE lesson1_4.c BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          #include<reg52.h>
+   2          void main()
+   3          {
+   4   1              P1=0XFD;
+   5   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =      4    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

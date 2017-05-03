@@ -1,0 +1,101 @@
+C51 COMPILER V7.06   40                                                                    07/26/2016 12:05:21 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE 40
+OBJECT MODULE PLACED IN 40.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE 40.C BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          //采用不同按键控制不同延时时间的LED流水灯状态切换
+   2          #include<reg52.h>
+   3          unsigned char ds;
+   4          sbit S1 = P3^4;
+   5          sbit S2 = P3^5;
+   6          sbit S3 = P3^6;
+   7          sbit S4 = P3^7;
+   8          
+   9          
+  10          void ys30ms()
+  11          {
+  12   1              unsigned char i,j;
+  13   1              for(i=0;i<100;i++)
+  14   1              for(j=0;j<100;j++)
+  15   1                      ;
+  16   1      }
+  17          
+  18          
+  19          void ys(unsigned char k)
+  20          {
+  21   1              unsigned char x;
+  22   1              for(x=0;x<k;x++)
+  23   1                      ys30ms();
+  24   1      }
+  25          
+  26          void main()
+  27          {
+  28   1              EA = 1;
+  29   1              ET0 = 1;
+  30   1              TR0 = 1;
+  31   1              TMOD = 0X01;
+  32   1              TH0 = 256-200;
+  33   1              TL0 = 256-200;
+  34   1              ds = 3;
+  35   1              while(1)
+  36   1              {
+  37   2                      P1 = 0xfe;
+  38   2                      ys(ds);
+  39   2                      P1 = 0xfd;
+  40   2                      ys(ds);
+  41   2                      P1 = 0xfb;
+  42   2                      ys(ds);
+  43   2                      P1 = 0xf7;
+  44   2                      ys(ds);
+  45   2                      P1 = 0xef;
+  46   2                      ys(ds);
+  47   2                      P1 = 0xdf;
+  48   2                      ys(ds);
+  49   2                      P1 = 0xbf;
+  50   2                      ys(ds);
+  51   2                      P1 = 0x7f;
+  52   2                      ys(ds);
+  53   2                      P1 = 0xff;
+  54   2              }
+  55   1      }
+C51 COMPILER V7.06   40                                                                    07/26/2016 12:05:21 PAGE 2   
+
+  56          
+  57          void time0() interrupt 1 using 1
+  58          {
+  59   1      
+  60   1              P3 = 0xff;
+  61   1              if((P3&0xf0) != 0xf0)
+  62   1              {       
+  63   2                      ys30ms();
+  64   2                      if(S1 == 0)
+  65   2                              ds = 5;
+  66   2                      if(S2 == 0)
+  67   2                              ds = 15;
+  68   2                      if(S3 == 0)
+  69   2                              ds = 25;
+  70   2                      if(S4 == 0)
+  71   2                              ds = 35;
+  72   2              }
+  73   1              TH0 = 256-200;
+  74   1              TL0 = 256-200;
+  75   1      
+  76   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    172    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

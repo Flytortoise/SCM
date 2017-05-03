@@ -1,0 +1,191 @@
+C51 COMPILER V7.06   LESSON5_1                                                             04/01/2016 23:00:09 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE LESSON5_1
+OBJECT MODULE PLACED IN .\lesson5_1.obj
+COMPILER INVOKED BY: d:\prg\Keil\C51\BIN\C51.EXE C:\Users\jacky\Desktop\lesson5_1.c DEBUG OBJECTEXTEND PRINT(.\lesson5_1
+                    -.lst) OBJECT(.\lesson5_1.obj)
+
+stmt level    source
+
+   1          /*用动态扫描和T1在数码管上显示出从765432开始以1/10秒的速度；
+   2          向下递减到765398并保持此数值；与此同时用T0以500毫秒速度让流水灯自上而下移动，
+   3          当数码管上数值减到停止时，流水灯也停止并全部闪烁；3秒后(用T0)流水灯全部关停；
+   4          数码管上显示出HELLO并保持住 ；；**/
+   5          #include <reg52.h>
+   6          #include <intrins.h>
+   7          #define uchar unsigned char
+   8          #define uint unsigned int
+   9          sbit dula=P2^6;
+  10          sbit wela=P2^7;
+  11          uchar code table[]={
+  12          0x3f,0x06,0x5b,0x4f,
+  13          0x66,0x6d,0x7d,0x07,
+  14          0x7f,0x6f,0x77,0x7c,
+  15          0x39,0x5e,0x79,0x71,
+  16          0x76,0x79,0x38,0x3f,0};         //英语HELLO的代码；
+  17          uchar temp,t0,t1,bai,shi,ge,flag,flag1;
+  18          uint shu;                               //数码管刚显示时的后三位432；
+  19          void init();
+  20          void display(uchar,uchar,uchar,uchar,uchar,uchar);
+  21          void delay(uint z)
+  22          {
+  23   1              uint t1,y;
+  24   1              for(t1=z;t1>0;t1--)
+  25   1                      for(y=110;y>0;y--);
+  26   1      }
+  27          void main()
+  28          {
+  29   1              init();                 //初始化shu=432;        流水一个灯亮；
+  30   1              while(1)
+  31   1              {
+  32   2                      if(flag1!=1)    //如果标志1   测试不等于1；
+  33   2                              display(7,6,5,bai,shi,ge);
+  34   2                      else
+  35   2                              display(16,17,18,18,19,20);     //否则就HELLO;
+  36   2              }
+  37   1      }
+  38          
+  39          void init()
+  40          {
+  41   1              shu=432;
+  42   1              temp=0xfe;              //流水灯的赋值；
+  43   1              P1=temp;
+  44   1              TMOD=0x11;
+  45   1              TH0=(65536-50000)/256;
+  46   1              TL0=(65536-50000)%256;
+  47   1              TH1=(65536-50000)/256;
+  48   1              TL1=(65536-50000)%256;
+  49   1              EA=1;
+  50   1              ET0=1;
+  51   1              ET1=1;
+  52   1              TR0=1;
+  53   1              TR1=1;
+  54   1      }
+C51 COMPILER V7.06   LESSON5_1                                                             04/01/2016 23:00:09 PAGE 2   
+
+  55          
+  56          void timer0() interrupt 1               //T0定时器；
+  57          {
+  58   1              TH0=(65536-50000)/256;
+  59   1              TL0=(65536-50000)%256;
+  60   1              t0++;
+  61   1              if(flag!=1)                     //如果标志~~测试不等于1；
+  62   1                      {
+  63   2                      if(t0==10)      //如果到了500毫秒，流水开始左移了；
+  64   2                              {
+  65   3                                      t0=1;        //??????????????????
+  66   3                                      temp=_crol_(temp,1);
+  67   3                                      P1=temp;
+  68   3                              }
+  69   2                      }
+  70   1              else
+  71   1                      {
+  72   2                              if(t0%4==0)     //相当于50毫秒闪烁全部的流水灯；
+  73   2                                      P1=~P1;
+  74   2                              if(t0==60)      //如果到了3秒钟；
+  75   2                              {
+  76   3                                      TR0=0;  //关停T0启动位；（自关）；
+  77   3                                      P1=0xff;        //关停P1口，即流水灯全部关停；
+  78   3                                      flag1=1;        //标志1  置为1；
+  79   3                              }
+  80   2                      }       
+  81   1      }
+  82          
+  83          void timer1() interrupt 3
+  84          {
+  85   1              TH1=(65536-50000)/256;
+  86   1              TL1=(65536-50000)%256;
+  87   1              t1++;
+  88   1              if(t1==2)
+  89   1                      {
+  90   2                              t1=0;
+  91   2                              shu--;          //到了100毫秒，后三位432开始自减；
+  92   2                              bai=shu/100;    //并把432自减后的数显示到管上；
+  93   2                              shi=shu%100/10;
+  94   2                              ge=shu%10;
+  95   2                              if(shu==398)    //如果减到了398这个数时；
+  96   2                                      {
+  97   3                                              TR0=0;  //先关停T0以便再赋值；
+  98   3                                              TH0=(65536-50000)/256;
+  99   3                                              TL0=(65536-50000)%256;
+ 100   3                                              TR0=1;  //T0置1；启动；
+ 101   3                                              flag=1; //标志~~置1；
+ 102   3                                              t0=0;   //T0清零；
+ 103   3                                              P1=0xff;        //P1口关停；流水
+ 104   3                                              TR1=0;  //关停T1启动位；
+ 105   3                                      }       
+ 106   2                      }       
+ 107   1      }
+ 108          
+ 109          void display(uchar aa,uchar bb,uchar cc,uchar ba,uchar sh,uchar g)
+ 110          {
+ 111   1              dula=1;
+ 112   1                      P0=table[aa];
+ 113   1                      dula=0;
+ 114   1                      P0=0xff;
+ 115   1                      wela=1;
+ 116   1                      P0=0xfe;
+C51 COMPILER V7.06   LESSON5_1                                                             04/01/2016 23:00:09 PAGE 3   
+
+ 117   1                      wela=0;
+ 118   1                      delay(1);
+ 119   1      
+ 120   1              dula=1;
+ 121   1                      P0=table[bb];
+ 122   1                      dula=0;
+ 123   1                      P0=0xff;
+ 124   1                      wela=1;
+ 125   1                      P0=0xfd;
+ 126   1                      wela=0;
+ 127   1                      delay(1);
+ 128   1      
+ 129   1             dula=1;
+ 130   1                      P0=table[cc];
+ 131   1                      dula=0;
+ 132   1                      P0=0xff;
+ 133   1                      wela=1;
+ 134   1                      P0=0xfb;
+ 135   1                      wela=0;
+ 136   1                      delay(1);
+ 137   1              dula=1;
+ 138   1                      P0=table[ba];
+ 139   1                      dula=0;
+ 140   1                      P0=0xff;
+ 141   1                      wela=1;
+ 142   1                      P0=0xf7;
+ 143   1                      wela=0;
+ 144   1                      delay(1);
+ 145   1      
+ 146   1                      dula=1;
+ 147   1                      P0=table[sh];
+ 148   1                      dula=0;
+ 149   1                      P0=0xff;
+ 150   1                      wela=1;
+ 151   1                      P0=0xef;
+ 152   1                      wela=0;
+ 153   1                      delay(1);
+ 154   1      
+ 155   1                      dula=1;
+ 156   1                      P0=table[g];
+ 157   1                      dula=0;
+ 158   1                      P0=0xff;
+ 159   1                      wela=1;
+ 160   1                      P0=0xdf;
+ 161   1                      wela=0;
+ 162   1                      delay(1);
+ 163   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    476    ----
+   CONSTANT SIZE    =     21    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     10       6
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

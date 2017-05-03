@@ -1,0 +1,65 @@
+C51 COMPILER V7.06   作襙1                                                                 07/14/2016 11:34:08 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE 作襙1
+OBJECT MODULE PLACED IN 作业1.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE 作业1.C BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          #include<reg52.h>
+   2          #define uint unsigned int
+   3          #define uchar unsigned char
+   4          uint table[]={0x7d,0x6d,0x66,
+   5          0x4f,0x5b,0x06};
+   6          uint table1[]={0xfe,0xfd,0xfb,
+   7          0xf7,0xef,0xdf};
+   8          sbit dula=P2^6;
+   9          sbit wela=P2^7;
+  10          void delay(uint a)
+  11          {       
+  12   1              uint x,y;
+  13   1              for(x=a;x>0;x--)
+  14   1                      for(y=110;y>0;y--);
+  15   1      }
+  16          
+  17          
+  18          void main()
+  19          {
+  20   1              uint wenum,dunum;
+  21   1              while(1)
+  22   1              {
+  23   2                      for(wenum=0,dunum=0;wenum<6&&dunum<6;wenum++,dunum++)
+  24   2                      {
+  25   3                              wela=1;
+  26   3                              P0=table1[wenum];
+  27   3                              wela=0;
+  28   3                              dula=1;
+  29   3                              P0=table[dunum];
+  30   3                              dula=0;
+  31   3                              delay(1);
+  32   3                              wela=1;//清除余辉
+  33   3                              P0=0xff;
+  34   3                              wela=0;
+  35   3                      
+  36   3                      }
+  37   2                      if(wenum==6&&dunum==6)
+  38   2                      {
+  39   3                              wenum=dunum=0;
+  40   3                      }
+  41   2              }
+  42   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    131    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     24    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

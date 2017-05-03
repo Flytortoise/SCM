@@ -1,0 +1,29 @@
+A51 MACRO ASSEMBLER  LESSON7_2                                                            07/28/2007 14:58:08 PAGE     1
+
+
+MACRO ASSEMBLER A51 V6.12
+OBJECT MODULE PLACED IN .\lesson7_2.OBJ
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE .\lesson7_2.asm SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0000h
+                       2     
+0000 C293              3     clr P1.3
+0002 0102              4     ajmp $
+                       5     end
+A51 MACRO ASSEMBLER  LESSON7_2                                                            07/28/2007 14:58:08 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+P1 . . . . . . . .  D ADDR   0090H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

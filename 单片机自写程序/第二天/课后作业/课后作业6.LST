@@ -1,0 +1,73 @@
+C51 COMPILER V7.06   ¿Î_ó×÷Ò_6                                                             07/11/2016 18:29:37 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE ¿Î_ó×÷Ò_6
+OBJECT MODULE PLACED IN ¿Îºó×÷Òµ6.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE ¿Îºó×÷Òµ6.c BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          #include<reg52.h>
+   2          #include <intrins.h>
+   3          sbit D0=P1^0;
+   4          sbit DEEP=P2^3;
+   5          typedef unsigned int uint;
+   6          typedef unsigned char uchar;
+   7          void relay()
+   8          {
+   9   1              uint i;
+  10   1              for(i=0;i<18500;i++)
+  11   1                      ;       
+  12   1      }               //100ms µÄÑÓ³Ù
+  13          
+  14          void main()
+  15          {
+  16   1              while(1)
+  17   1              {
+  18   2                      uint k,j,i,b,c,d,e;
+  19   2                      uchar a;
+  20   2                      
+  21   2                      for(e=0;e<3;e++)
+  22   2                      {
+  23   3                              b=0xfe;
+  24   3                              c=1;
+  25   3                              d=8;
+  26   3                              for(i=0;i<8;i++)
+  27   3                              {
+  28   4                                      a=b;
+  29   4                                      for(k=d;k>0;k--)
+  30   4                                      {       P1=a;
+  31   5                                      
+  32   5                                              for(j=0;j<3;j++)
+  33   5                                              relay();
+  34   5                                              P1=0xff;
+  35   5              
+  36   5                                              for(j=0;j<3;j++)
+  37   5                                              relay();
+  38   5                                              a=_crol_(a,1);          //Ñ­»·×óÒÆ
+  39   5                                      }
+  40   4                                      b=b-2*c;
+  41   4                                      d--;
+  42   4                                      c=2*c;
+  43   4                              }
+  44   3                      }       
+  45   2                      while(1);
+  46   2              }
+  47   1      }
+  48          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    216    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+C51 COMPILER V7.06   ¿Î_ó×÷Ò_6                                                             07/11/2016 18:29:37 PAGE 2   
+
+   DATA SIZE        =   ----      15
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

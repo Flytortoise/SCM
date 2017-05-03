@@ -1,0 +1,124 @@
+C51 COMPILER V6.12  4_1                                                                    10/03/2007 17:30:06 PAGE 1   
+
+
+C51 COMPILER V6.12, COMPILATION OF MODULE 4_1
+OBJECT MODULE PLACED IN .\4_1.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\lesson4\4_1.c DEBUG OBJECTEXTEND PRINT(.\4_1.lst) OBJECT(.\4_1.obj) 
+
+stmt level    source
+
+   1          /*******************************************************************/
+   2          /* TX-1C单片机实验板实验例程        							   */
+   3          /* 2007年8月第二期培训班课后习题详解							   */
+   4          /* 作者：郭天祥      											   */
+   5          /* 邮箱：txmcu@163.com 										  	   */
+   6          /* 网站：www.txmcu.com(天祥电子)    							   */
+   7          /*【版权】Copyright(C)天祥电子 www.txmcu.com  All Rights Reserved  */
+   8          /*【声明】此程序仅用于学习与参考，引用请注明版权和作者信息！       */
+   9          /*                                                                 */
+  10          /*******************************************************************/
+  11          /*                                                          
+  12          利用动态扫描方法在六位数码管上显示出稳定的654321.
+  13          时钟频率为11.0592M
+  14          */
+  15          /*********************************************************/
+  16          #include<reg52.h>  //52单片机头文件
+  17          #include <intrins.h> //包含有左右循环移位子函数的库
+  18          #define uint unsigned int    //宏定义
+  19          #define uchar unsigned char  //宏定义
+  20          sbit dula=P2^6;       //数码管段选锁存端
+  21          sbit wela=P2^7;       ////数码管位选锁存端
+  22          uchar code table[]={
+  23          0x3f,0x06,0x5b,0x4f,
+  24          0x66,0x6d,0x7d,0x07,
+  25          0x7f,0x6f,0x77,0x7c,
+  26          0x39,0x5e,0x79,0x71};
+  27          void display(uchar,uchar,uchar,uchar,uchar,uchar);
+  28          void delay(uint);
+  29          void main()
+  30          {
+  31   1      	while(1)
+  32   1      	{
+  33   2      		display(6,5,4,3,2,1);
+  34   2      	}
+  35   1      }
+  36          
+  37          void display(uchar one,uchar two,uchar three,uchar four,uchar five,uchar six)
+  38          {
+  39   1              dula=1;
+  40   1      		P0=table[one];
+  41   1      		dula=0;
+  42   1      		P0=0xff;
+  43   1      		wela=1;
+  44   1      		P0=0xfe;
+  45   1      		wela=0;
+  46   1      		delay(1);
+  47   1      
+  48   1      		dula=1;
+  49   1      		P0=table[two];
+  50   1      		dula=0;
+  51   1      		P0=0xff;
+  52   1      		wela=1;
+  53   1      		P0=0xfd;
+  54   1      		wela=0;
+  55   1      		delay(1);
+C51 COMPILER V6.12  4_1                                                                    10/03/2007 17:30:06 PAGE 2   
+
+  56   1      
+  57   1      		dula=1;
+  58   1      		P0=table[three];
+  59   1      		dula=0;
+  60   1      		P0=0xff;
+  61   1      		wela=1;
+  62   1      		P0=0xfb;
+  63   1      		wela=0;
+  64   1      		delay(1);
+  65   1      
+  66   1      		dula=1;
+  67   1      		P0=table[four];
+  68   1      		dula=0;
+  69   1      		P0=0xff;
+  70   1      		wela=1;
+  71   1      		P0=0xf7;
+  72   1      		wela=0;
+  73   1      		delay(1);
+  74   1      
+  75   1      		dula=1;
+  76   1      		P0=table[five];
+  77   1      		dula=0;
+  78   1      		P0=0xff;
+  79   1      		wela=1;
+  80   1      		P0=0xef;
+  81   1      		wela=0;
+  82   1      		delay(1);
+  83   1      
+  84   1      		dula=1;
+  85   1      		P0=table[six];
+  86   1      		dula=0;
+  87   1      		P0=0xff;
+  88   1      		wela=1;
+  89   1      		P0=0xdf;
+  90   1      		wela=0;
+  91   1      		delay(1);
+  92   1      }
+  93          
+  94          void delay(uint z)
+  95          {
+  96   1      	uint x,y;
+  97   1      	for(x=z;x>0;x--)
+  98   1      		for(y=110;y>0;y--);
+  99   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    197    ----
+   CONSTANT SIZE    =     16    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       6
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

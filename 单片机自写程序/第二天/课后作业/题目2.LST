@@ -1,0 +1,58 @@
+C51 COMPILER V7.06   题目2                                                                 07/11/2016 17:26:14 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE 题目2
+OBJECT MODULE PLACED IN 题目2.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE 题目2.C BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          #include<reg52.h>
+   2          #include <intrins.h>
+   3          sbit D0=P1^0;
+   4          sbit DEEP=P2^3;
+   5          typedef unsigned int uint;
+   6          typedef unsigned char uchar;
+   7          void relay()
+   8          {
+   9   1              uint i;
+  10   1              for(i=0;i<18500;i++)
+  11   1                      ;       
+  12   1      }
+  13          
+  14          void main()
+  15          {
+  16   1              while(1)
+  17   1              {
+  18   2                      uint k,j;
+  19   2                      uchar a=0xfe;
+  20   2                      for(k=64;k>0;k--)
+  21   2                      {       P1=a;
+  22   3                              DEEP=0;
+  23   3                              for(j=0;j<5;j++)
+  24   3                              relay();
+  25   3                              P1=0xff;
+  26   3                              DEEP=1;
+  27   3                              for(j=0;j<5;j++)
+  28   3                              relay();
+  29   3                              a=_crol_(a,1);
+  30   3                      }
+  31   2                      while(1);
+  32   2              }
+  33   1      }
+  34          
+  35          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    118    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       5
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

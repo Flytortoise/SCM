@@ -1,0 +1,61 @@
+C51 COMPILER V7.06   3                                                                     07/24/2016 00:19:01 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE 3
+OBJECT MODULE PLACED IN 3.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE 3.c BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          //采用不同的数据类型进行演示操作，从中理解不同的数据类型的定义
+   2          #include<reg52.h>
+   3          void int_ys(void)
+   4          {
+   5   1              unsigned int m;
+   6   1              for(m=0;m<30000;m++)
+   7   1                              ; 
+   8   1      }
+   9          
+  10          void char_ys(void)
+  11          {
+  12   1              unsigned char i,j;
+  13   1              for(i=0;i<200;i++)
+  14   1                      for(j=0;j<180;j++)
+  15   1                              ;
+  16   1      }
+  17          
+  18          void main(void)
+  19          {
+  20   1              unsigned char i;
+  21   1              while(1)
+  22   1              {
+  23   2                      for(i=0;i<3;i++)
+  24   2                      {
+  25   3                              P1=0xfe;
+  26   3                              int_ys();
+  27   3                              P1=0xff;
+  28   3                              int_ys();
+  29   3                      }
+  30   2                      for(i=0;i<3;i++)
+  31   2                      {
+  32   3                              P1=0xfe;
+  33   3                              char_ys();
+  34   3                              P1=0xff;
+  35   3                              char_ys();
+  36   3                      }
+  37   2              }
+  38   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     69    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

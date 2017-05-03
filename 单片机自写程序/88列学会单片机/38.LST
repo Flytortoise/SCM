@@ -1,0 +1,154 @@
+C51 COMPILER V7.06   38                                                                    07/26/2016 11:45:25 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE 38
+OBJECT MODULE PLACED IN 38.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE 38.C BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          //完成采用不同的按键控制LED流水灯切换的功能
+   2          #include<reg52.h>
+   3          sbit S1 = P3^4;
+   4          sbit S2 = P3^5;
+   5          sbit S3 = P3^6;
+   6          sbit S4 = P3^7;
+   7          unsigned char key;
+   8          void ys()
+   9          {
+  10   1              unsigned char i,j;
+  11   1              for(i=0;i<250;i++)
+  12   1              for(j=0;j<250;j++)
+  13   1                      ;
+  14   1      }
+  15          
+  16          void ys30ms()
+  17          {
+  18   1              unsigned char i,j;
+  19   1              for(i=0;i<100;i++)
+  20   1              for(j=0;j<100;j++)
+  21   1                      ;
+  22   1      }
+  23          
+  24          void zxled()
+  25          {
+  26   1              P1 = 0xfe;
+  27   1              ys();
+  28   1              P1 = 0xfd;
+  29   1              ys();
+  30   1              P1 = 0xfb;
+  31   1              ys();
+  32   1              P1 = 0xf7;
+  33   1              ys();
+  34   1              P1 = 0xef;
+  35   1              ys();
+  36   1              P1 = 0xdf;
+  37   1              ys();
+  38   1              P1 = 0xbf;
+  39   1              ys();
+  40   1              P1 = 0x7f;
+  41   1              ys();
+  42   1              P1 = 0xff;
+  43   1              P1 = 0xfe;
+  44   1              ys();
+  45   1      }
+  46          
+  47          void fxled()
+  48          {
+  49   1              P1 = 0x7f;
+  50   1              ys();
+  51   1              P1 = 0xbf;
+  52   1              ys();
+  53   1              P1 = 0xdf;
+  54   1              ys();
+  55   1              P1 = 0xef;
+C51 COMPILER V7.06   38                                                                    07/26/2016 11:45:25 PAGE 2   
+
+  56   1              ys();
+  57   1              P1 = 0xf7;
+  58   1              ys();
+  59   1              P1 = 0xfb;
+  60   1              ys();
+  61   1              P1 = 0xfd;
+  62   1              ys();
+  63   1              P1 = 0xfe;
+  64   1              ys();
+  65   1      }
+  66          
+  67          void stop()
+  68          {
+  69   1              P1 = 0xff;
+  70   1      }
+  71          
+  72          void ssled()
+  73          {
+  74   1              P1 = 0xff;
+  75   1              ys();
+  76   1              P1 = 0x00;
+  77   1              ys();
+  78   1              P1 = 0xff;
+  79   1              ys();
+  80   1              P1 = 0x00;
+  81   1              ys();
+  82   1              P1 = 0xff;
+  83   1              ys();
+  84   1              P1 = 0x00;
+  85   1              ys();
+  86   1              P1 = 0xff;
+  87   1              ys();
+  88   1              P1 = 0x00;
+  89   1              ys();
+  90   1              P1 = 0xff;
+  91   1              ys();
+  92   1              P1 = 0x00;
+  93   1              ys();
+  94   1      }
+  95          
+  96          void keys()
+  97          {
+  98   1              if((P3 & 0xf0) != 0xf0)
+  99   1              {
+ 100   2                      ys30ms();
+ 101   2                      if(S1 == 0)
+ 102   2                              key = 1;
+ 103   2                      if(S2 == 0)
+ 104   2                              key = 2;
+ 105   2                      if(S3 == 0)
+ 106   2                              key = 3;
+ 107   2                      if(S4 == 0)
+ 108   2                              key = 4;
+ 109   2              }
+ 110   1      }
+ 111          
+ 112          void main()
+ 113          {
+ 114   1              key = 0;
+ 115   1              while(1)
+ 116   1              {
+ 117   2                      keys();
+C51 COMPILER V7.06   38                                                                    07/26/2016 11:45:25 PAGE 3   
+
+ 118   2                      switch(key)
+ 119   2                      {
+ 120   3                              case 1 :zxled();break;
+ 121   3                              case 2 :fxled();break;
+ 122   3                              case 3 :stop();break;
+ 123   3                              case 4 :ssled();break;
+ 124   3                      }
+ 125   2                      key = 0;
+ 126   2              }
+ 127   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    255    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

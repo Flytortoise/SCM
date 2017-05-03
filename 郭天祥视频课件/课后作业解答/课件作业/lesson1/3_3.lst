@@ -1,0 +1,146 @@
+C51 COMPILER V6.12  3_3                                                                    10/02/2007 21:43:25 PAGE 1   
+
+
+C51 COMPILER V6.12, COMPILATION OF MODULE 3_3
+OBJECT MODULE PLACED IN .\3_3.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\lesson3\3_3.c DEBUG OBJECTEXTEND PRINT(.\3_3.lst) OBJECT(.\3_3.obj) 
+
+stmt level    source
+
+   1          /*******************************************************************/
+   2          /* TX-1Cµ¥Æ¬»úÊµÑé°åÊµÑéÀý³Ì        							   */
+   3          /* 2007Äê8ÔÂµÚ¶þÆÚÅàÑµ°à¿ÎºóÏ°ÌâÏê½â							   */
+   4          /* ×÷Õß£º¹ùÌìÏé      											   */
+   5          /* ÓÊÏä£ºtxmcu@163.com 										  	   */
+   6          /* ÍøÕ¾£ºwww.txmcu.com(ÌìÏéµç×Ó)    							   */
+   7          /*¡¾°æÈ¨¡¿Copyright(C)ÌìÏéµç×Ó www.txmcu.com  All Rights Reserved  */
+   8          /*¡¾ÉùÃ÷¡¿´Ë³ÌÐò½öÓÃÓÚÑ§Ï°Óë²Î¿¼£¬ÒýÓÃÇë×¢Ã÷°æÈ¨ºÍ×÷ÕßÐÅÏ¢£¡       */
+   9          /*                                                                 */
+  10          /*******************************************************************/
+  11          /*                                                          
+  12          Í¬Ê±ÓÃÁ½¸ö¶¨Ê±Æ÷¿ØÖÆ·äÃùÆ÷·¢Éù£¬
+  13          ¶¨Ê±Æ÷0¿ØÖÆÆµÂÊ£¬¶¨Ê±Æ÷1¿ØÖÆÍ¬¸ö
+  14          ÆµÂÊ³ÖÐøµÄÊ±¼ä£¬¼ä¸ô2sÒÀ´ÎÊä³ö
+  15          1£¬10£¬50,100£¬200,400,800,
+  16          1k£¨hz£©µÄ·½²¨£
+  17          Éè¾§ÕñÆµÂÊÎª12MHz¡£
+  18          */
+  19          /*********************************************************/
+  20          #include<reg52.h>  //52µ¥Æ¬»úÍ·ÎÄ¼þ
+  21          #include <intrins.h> //°üº¬ÓÐ×óÓÒÑ­»·ÒÆÎ»×Óº¯ÊýµÄ¿â
+  22          #define uint unsigned int    //ºê¶¨Òå
+  23          #define uchar unsigned char  //ºê¶¨Òå
+  24          sbit beep=P2^3;
+  25          uchar tt;
+  26          uint fre,flag;
+  27          
+  28          void main()		    //Ö÷º¯Êý
+  29          {
+  30   1      	fre=50000;
+  31   1      	beep=0;
+  32   1      	TMOD=0x11;//ÉèÖÃ¶¨Ê±Æ÷0,¶¨Ê±Æ÷1Îª¹¤×÷·½Ê½1
+  33   1      	TH0=(65536-fre)/256;
+  34   1      	TL0=(65536-fre)%256;
+  35   1      	TH1=(65536-50000)/256;
+  36   1      	TL1=(65536-50000)%256;
+  37   1      	EA=1;//¿ª×ÜÖÐ¶Ï
+  38   1      	ET0=1;//¿ª¶¨Ê±Æ÷0ÖÐ¶Ï
+  39   1      	ET1=1;
+  40   1      	TR1=1;
+  41   1      	TR0=1;//Æô¶¯¶¨Ê±Æ÷0
+  42   1      	while(1);//µÈ´ýÖÐ¶Ï²úÉú
+  43   1      	
+  44   1      }
+  45          
+  46          void timer0() interrupt 1
+  47          {
+  48   1      	TR0=0;
+  49   1      	TH0=(65536-fre)/256;
+  50   1      	TL0=(65536-fre)%256;
+  51   1      	tt++;
+  52   1      	if(flag<40)
+  53   1      		if(tt==10)
+  54   1      			{
+  55   2      				tt=0;
+C51 COMPILER V6.12  3_3                                                                    10/02/2007 21:43:25 PAGE 2   
+
+  56   2      				fre=50000;
+  57   2      				beep=~beep;
+  58   2      			}
+  59   1      	if(flag>=40&&flag<80)
+  60   1      		{
+  61   2      			tt=0;
+  62   2      			fre=50000;
+  63   2      			beep=~beep;	
+  64   2      		}
+  65   1      	if(flag>=80&&flag<120)
+  66   1      		{
+  67   2      			tt=0;
+  68   2      			fre=10000;
+  69   2      			beep=~beep;	
+  70   2      		}
+  71   1      	if(flag>=120&&flag<160)
+  72   1      		{
+  73   2      			tt=0;
+  74   2      			fre=5000;
+  75   2      			beep=~beep;	
+  76   2      		}
+  77   1      	if(flag>=160&&flag<200)
+  78   1      		{
+  79   2      			tt=0;
+  80   2      			fre=2500;
+  81   2      			beep=~beep;	
+  82   2      		}
+  83   1      	if(flag>=200&&flag<240)
+  84   1      		{
+  85   2      			tt=0;
+  86   2      			fre=1250;
+  87   2      			beep=~beep;	
+  88   2      		}
+  89   1      	if(flag>=240&&flag<280)
+  90   1      		{
+  91   2      			tt=0;
+  92   2      			fre=625;
+  93   2      			beep=~beep;	
+  94   2      		}
+  95   1      	if(flag>=280&&flag<320)
+  96   1      		{
+  97   2      			tt=0;
+  98   2      			fre=312;
+  99   2      			beep=~beep;	
+ 100   2      		}
+ 101   1      	if(flag>=320&&flag<360)
+ 102   1      		{
+ 103   2      			tt=0;
+ 104   2      			fre=156;
+ 105   2      			beep=~beep;	
+ 106   2      		}
+ 107   1      	TR0=1;
+ 108   1      }
+ 109          void timer1() interrupt 3
+ 110          {
+ 111   1      	TH1=(65536-50000)/256;
+ 112   1      	TL1=(65536-50000)%256;
+ 113   1      	flag++;
+ 114   1      	if(flag==360)
+ 115   1      	  {
+ 116   2      	    flag=0;
+ 117   2      	    fre=50000;
+C51 COMPILER V6.12  3_3                                                                    10/02/2007 21:43:25 PAGE 3   
+
+ 118   2      	  }
+ 119   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    569    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      5    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

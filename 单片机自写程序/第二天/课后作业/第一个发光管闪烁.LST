@@ -1,0 +1,48 @@
+C51 COMPILER V7.06   _谝籣鯻__鈅苌了_                                                      07/11/2016 17:14:12 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE _谝籣鯻__鈅苌了_
+OBJECT MODULE PLACED IN 第一个发光管闪烁.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE 第一个发光管闪烁.c BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          #include<reg52.h>
+   2          sbit D0=P1^0;
+   3          typedef unsigned int uint;
+   4          void relay()
+   5          {
+   6   1              uint i;
+   7   1              for(i=0;i<32000;i++)
+   8   1                      ;       
+   9   1      }
+  10          
+  11          void main()
+  12          {
+  13   1              uint a;
+  14   1              while (1)
+  15   1              {
+  16   2                      for(a=0;a<10;a++)
+  17   2                      {
+  18   3                      D0=0;
+  19   3                      relay();
+  20   3                      D0=1;
+  21   3                      relay();
+  22   3                      }
+  23   2                      while(1);
+  24   2              }
+  25   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     43    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

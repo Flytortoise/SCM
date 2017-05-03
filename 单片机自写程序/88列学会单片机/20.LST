@@ -1,0 +1,45 @@
+C51 COMPILER V7.06   20                                                                    07/24/2016 22:38:09 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE 20
+OBJECT MODULE PLACED IN 20.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE 20.C BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          //完成定时器T0为延时实现LED闪烁的功能
+   2          #include<reg52.h>
+   3          void main()
+   4          {
+   5   1              EA = 1;
+   6   1              ET0 = 1;
+   7   1              TMOD = 0X01;
+   8   1              TH0 = (65536-46083)/256;
+   9   1              TL0 = (65536-46083)%256;
+  10   1              TR0 = 1;
+  11   1              TF0 = 0;        //查询方式软件清0；中断方式时硬件自动清0
+  12   1              P1 = 0xff;
+  13   1              while(1)
+  14   1              {
+  15   2                      while(TF0 == 0)
+  16   2                              ;
+  17   2                      TF0 = 0;
+  18   2                      P1 = ~P1;
+  19   2                      TH0 = (65536-46083)/256;
+  20   2                      TL0 = (65536-46083)%256;
+  21   2              }
+  22   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     36    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

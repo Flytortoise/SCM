@@ -1,0 +1,83 @@
+C51 COMPILER V7.06   LESSON2_3                                                             12/27/2015 19:45:34 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE LESSON2_3
+OBJECT MODULE PLACED IN lesson2_3.OBJ
+COMPILER INVOKED BY: d:\prg\Keil\C51\BIN\C51.EXE lesson2_3.c DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          #include<reg52.h>
+   2          #include <intrins.h>
+   3          #define uint unsigned int 
+   4          #define uchar unsigned char 
+   5          uchar temp,num,num1;
+   6          sbit beep=P2^3;
+   7          sbit d0=P1^1;
+   8          sbit d1=P1^2;
+   9          sbit d2=P1^3;
+  10          sbit d3=P1^4;
+  11          void delay(uint);
+  12          
+  13          void main()
+  14          {
+  15   1              d0=0;
+  16   1              d1=0;
+  17   1              d2=0;
+  18   1              d3=0;
+  19   1              delay(10000);
+  20   1              temp=0xfe;
+  21   1              while(1)
+  22   1              {       
+  23   2              for(num1=0;num1<3;num1++)
+  24   2                      {       
+  25   3                      for(num=0;num<8;num++)
+  26   3                      {
+  27   4                              P1=temp;
+  28   4                              beep=0;
+  29   4                              delay(100);
+  30   4                              temp=_crol_(temp,1);
+  31   4                              P1=0xff;
+  32   4                              beep=1;
+  33   4                              delay(100);     
+  34   4                      }
+  35   3                      }
+  36   2      for(num1=0;num1<3;num1++)
+  37   2                      {       
+  38   3                      for(num=0;num<8;num++)
+  39   3                      {
+  40   4                              P1=temp;
+  41   4                              beep=0;
+  42   4                              delay(100);
+  43   4                              temp=_cror_(temp,1);
+  44   4                              P1=0xff;
+  45   4                              beep=1;
+  46   4                              delay(100);     
+  47   4                      }
+  48   3                      }
+  49   2                      while(1);
+  50   2              }
+  51   1      }
+  52          
+  53          void delay(uint z)
+  54          {
+  55   1              uint x,y;
+C51 COMPILER V7.06   LESSON2_3                                                             12/27/2015 19:45:34 PAGE 2   
+
+  56   1              for(x=z;x>0;x--)
+  57   1                      for(y=110;y>0;y--);     
+  58   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    153    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      3    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

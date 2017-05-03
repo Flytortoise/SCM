@@ -1,0 +1,191 @@
+C51 COMPILER V6.12  LESSON4ZUOYE                                                           07/24/2007 23:56:38 PAGE 1   
+
+
+C51 COMPILER V6.12, COMPILATION OF MODULE LESSON4ZUOYE
+OBJECT MODULE PLACED IN .\lesson4zuoye.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\..\..\My Documents\My QQ Files\lesson4zuoye.c DEBUG OBJECTEXTEND PRINT(.
+                    -\lesson4zuoye.lst) OBJECT(.\lesson4zuoye.obj) 
+
+stmt level    source
+
+   1          #include<reg52.h>
+   2          #include<intrins.h>
+   3          #define uchar unsigned char
+   4          #define uint unsigned int
+   5          uchar t1,t2,temp,bai,shi,ge,flag,flag1;
+   6          uint shu;
+   7          sbit dula=P2^6;
+   8          sbit wela=P2^7;
+   9          uchar code table[]={
+  10          0x3f,0x06,0x5b,0x4f,
+  11          0x66,0x6d,0x7d,0x07,
+  12          0x7f,0x6f,0x77,0x7c,
+  13          0x39,0x5e,0x79,0x71,
+  14          0x76,0x79,0x38,0x3f,0};
+  15          void display(uchar aa,uchar bb,uchar cc,uchar bai,uchar shi,uchar ge);
+  16          void init();
+  17          void delay(uint z);
+  18          void main()
+  19          {
+  20   1      	init();
+  21   1      	while(1)
+  22   1      	{
+  23   2      		if(flag1!=1)
+  24   2      			display(7,6,5,bai,shi,ge);
+  25   2      		else
+  26   2      			display(16,17,18,18,19,20);
+  27   2      	}
+  28   1      }
+  29          
+  30          void init()
+  31          {	
+  32   1      	TMOD=0x11;
+  33   1      	TH0=(65536-50000)/256;
+  34   1      	TL0=(65536-50000)%256;
+  35   1      	TH1=(65536-50000)/256;
+  36   1      	TL1=(65536-50000)%256;
+  37   1      	EA=1;
+  38   1      	ET0=1;
+  39   1      	ET1=1;
+  40   1      	TR0=1;
+  41   1      	TR1=1;
+  42   1      	shu=432;
+  43   1      	temp=0xfe;
+  44   1      	P1=temp;
+  45   1      }
+  46          
+  47          void timer0() interrupt 1
+  48          {
+  49   1      	TH0=(65536-50000)/256;
+  50   1      	TL0=(65536-50000)%256;
+  51   1      	t1++;
+  52   1      	if(flag!=1)
+  53   1      	{
+  54   2      		if(t1==10)
+C51 COMPILER V6.12  LESSON4ZUOYE                                                           07/24/2007 23:56:38 PAGE 2   
+
+  55   2      			{
+  56   3      				t1=0;
+  57   3      				temp=_crol_(temp,1);
+  58   3      				P1=temp;
+  59   3      			}	
+  60   2      	}
+  61   1      	else
+  62   1      		{
+  63   2      			if(t1%4==0)
+  64   2      				P1=~P1;
+  65   2      			if(t1==60)
+  66   2      				{
+  67   3      					flag1=1;
+  68   3      					TR0=0;
+  69   3      					P1=0xff;
+  70   3      				}
+  71   2      		}
+  72   1      }
+  73          
+  74          void timer1() interrupt 3
+  75          {
+  76   1      	TH1=(65536-50000)/256;
+  77   1      	TL1=(65536-50000)%256;
+  78   1      	t2++;
+  79   1      	if(t2==2)
+  80   1      		{
+  81   2      			t2=0;
+  82   2      			shu--;
+  83   2      			if(shu==398)
+  84   2      				{
+  85   3      					TR1=0;
+  86   3      					TR0=0;
+  87   3      					TH0=(65536-50000)/256;
+  88   3      					TL0=(65536-50000)%256;
+  89   3      					TR0=1;
+  90   3      					flag=1;
+  91   3      					t1=0;
+  92   3      					P1=0xff;
+  93   3      				}
+  94   2      			bai=shu/100;
+  95   2      			shi=shu%100/10;
+  96   2      			ge=shu%10;
+  97   2      		}	
+  98   1      }
+  99          
+ 100          void display(uchar aa,uchar bb,uchar cc,uchar bai,uchar shi,uchar ge)
+ 101          {
+ 102   1              dula=1;
+ 103   1      		P0=table[aa];
+ 104   1      		dula=0;
+ 105   1      		P0=0xff;
+ 106   1      		wela=1;
+ 107   1      		P0=0xfe;
+ 108   1      		wela=0;
+ 109   1      		delay(1);
+ 110   1      
+ 111   1             dula=1;
+ 112   1      		P0=table[bb];
+ 113   1      		dula=0;
+ 114   1      		P0=0xff;
+ 115   1      		wela=1;
+ 116   1      		P0=0xfd;
+C51 COMPILER V6.12  LESSON4ZUOYE                                                           07/24/2007 23:56:38 PAGE 3   
+
+ 117   1      		wela=0;
+ 118   1      		delay(1);
+ 119   1      
+ 120   1              dula=1;
+ 121   1      		P0=table[cc];
+ 122   1      		dula=0;
+ 123   1      		P0=0xff;
+ 124   1      		wela=1;
+ 125   1      		P0=0xfb;
+ 126   1      		wela=0;
+ 127   1      		delay(1);
+ 128   1      
+ 129   1              dula=1;
+ 130   1      		P0=table[bai];
+ 131   1      		dula=0;
+ 132   1      		P0=0xff;
+ 133   1      		wela=1;
+ 134   1      		P0=0xf7;
+ 135   1      		wela=0;
+ 136   1      		delay(1);
+ 137   1      
+ 138   1      		dula=1;
+ 139   1      		P0=table[shi];
+ 140   1      		dula=0;
+ 141   1      		P0=0xff;
+ 142   1      		wela=1;
+ 143   1      		P0=0xef;
+ 144   1      		wela=0;
+ 145   1      		delay(1);
+ 146   1      
+ 147   1      		dula=1;
+ 148   1      		P0=table[ge];
+ 149   1      		dula=0;
+ 150   1      		P0=0xff;
+ 151   1      		wela=1;
+ 152   1      		P0=0xdf;
+ 153   1      		wela=0;
+ 154   1      		delay(1);
+ 155   1      }
+ 156          
+ 157          void delay(uint z)
+ 158          {
+ 159   1      	uint x,y;
+ 160   1      	for(x=z;x>0;x--)
+ 161   1      		for(y=110;y>0;y--);
+ 162   1      }
+ 163          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    488    ----
+   CONSTANT SIZE    =     21    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     10       6
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

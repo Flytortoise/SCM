@@ -1,0 +1,56 @@
+C51 COMPILER V6.12  1_9                                                                    09/30/2007 00:14:11 PAGE 1   
+
+
+C51 COMPILER V6.12, COMPILATION OF MODULE 1_9
+OBJECT MODULE PLACED IN .\1_9.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE .\1_9.c DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          /*******************************************************************/
+   2          /* TX-1C单片机实验板实验例程        							   */
+   3          /* 2007年8月第二期培训班课后习题详解							   */
+   4          /* 作者：郭天祥      											   */
+   5          /* 邮箱：txmcu@163.com 										  	   */
+   6          /* 网站：www.txmcu.com(天祥电子)    							   */
+   7          /* 题目内容：用位操作点亮第一个发光管.  						   */
+   8          /*【版权】Copyright(C)天祥电子 www.txmcu.com  All Rights Reserved  */
+   9          /*【声明】此程序仅用于学习与参考，引用请注明版权和作者信息！       */
+  10          /*                                                                 */
+  11          /*******************************************************************/
+  12                                                                     
+  13          // 尝试让第一个发光管闪烁.
+  14          // 适用 TX-1C单片机实验板
+  15          // 晶振为11.0592M
+  16          
+  17          /*********************************************************/
+  18          #include<reg52.h>  //52单片机头文件
+  19          sbit led1=P1^0;    //单片机管脚位声明
+  20          void main()		   //主函数
+  21          {
+  22   1      	unsigned int i;
+  23   1      	while(1)
+  24   1      	{
+  25   2      		i=50000;
+  26   2      		led1=0;			//点亮灯
+  27   2      		while(i--);     //延时
+  28   2      		i=50000;
+  29   2      		led1=1;         //熄灭灯
+  30   2      		while(i--);   		
+  31   2      	}  
+  32   1      
+  33   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     34    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

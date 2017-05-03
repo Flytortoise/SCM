@@ -1,0 +1,18 @@
+C51 COMPILER V6.12  LESSON1_3                                                              07/21/2007 11:25:14 PAGE 1   
+
+
+C51 COMPILER V6.12, COMPILATION OF MODULE LESSON1_3
+OBJECT MODULE PLACED IN .\lesson1_3.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE .\lesson1_3.c DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          #include<reg52.h>
+   2          void main()
+   3          {
+   4   1      	P1=0xfd;
+   5   1      	D1=0;
+*** ERROR C202 IN LINE 5 OF .\LESSON1_3.C: 'D1': undefined identifier
+   6   1      }
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)

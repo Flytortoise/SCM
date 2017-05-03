@@ -1,0 +1,46 @@
+C51 COMPILER V7.06   5                                                                     07/24/2016 00:35:22 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE 5
+OBJECT MODULE PLACED IN 5.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE 5.c BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          //完成8个LED等从右往左依次变化的功能
+   2          #include<reg52.h>
+   3          void ys(void)
+   4          {
+   5   1              unsigned int a;
+   6   1              for(a=0;a<30000;a++)
+   7   1                      ;
+   8   1      }
+   9          
+  10          void main(void)
+  11          {
+  12   1              unsigned char i;
+  13   1              while(1)
+  14   1              {
+  15   2                      P1=0xfe;
+  16   2                      ys();
+  17   2                      for(i=0;i<8;i++)
+  18   2                      {
+  19   3                              P1=P1<<1;
+  20   3                              ys();
+  21   3                      }
+  22   2              }
+  23   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     38    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
