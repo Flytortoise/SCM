@@ -1,0 +1,24 @@
+C51 COMPILER V9.01   PIPE                                                                  05/04/2017 09:32:48 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE PIPE
+OBJECT MODULE PLACED IN .\Objects\Pipe.obj
+COMPILER INVOKED BY: F:\Keil\Keil5\C51\BIN\C51.EXE Pipe.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\P
+                    -ipe.lst) TABS(2) OBJECT(.\Objects\Pipe.obj)
+
+line level    source
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   ----    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -14,7 +14,7 @@ void delay(uint z);
 void init();
 void main()
 {	
-	init();//初始化子程序
+	init();//鍒濆鍖栧瓙绋嬪簭
 	while(1)
 	{
 		if(aa==20)
@@ -44,8 +44,8 @@ void display(uchar bai,uchar shi,uchar ge)
 {
         dula=1;
 		P0=table[bai];
-		dula=0;
-		P0=0xff;
+		dula=0;		
+		P0=0xff;		
 		wela=1;
 		P0=0xfe;
 		wela=0;
@@ -83,7 +83,7 @@ void init()
 	TR0=1;	
 }
 
-void timer0() interrupt 1
+void timer0() interrupt 1	//50ms
 {
 	TH0=(65536-50000)/256;
 	TL0=(65536-50000)%256;

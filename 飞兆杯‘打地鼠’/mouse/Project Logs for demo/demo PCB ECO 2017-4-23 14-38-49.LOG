@@ -1,0 +1,5 @@
+Added Pin To Net: NetName=XTAL1 Pin=C4-2
+Added Pin To Net: NetName=XTAL2 Pin=C5-2
+Added Pin To Net: NetName=XTAL2 Pin=Y1-1
+Added Pin To Net: NetName=XTAL1 Pin=Y1-2
+Added Room: Name=demo

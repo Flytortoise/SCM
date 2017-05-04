@@ -1,0 +1,7 @@
+".\Objects\demo.obj",
+".\Objects\LED.obj",
+".\Objects\Delay.obj",
+".\Objects\Key.obj",
+".\Objects\Display.obj" 
+TO ".\Objects\0503" 
+PRINT(".\Listings\0503.m51") RAMSIZE(256) 
