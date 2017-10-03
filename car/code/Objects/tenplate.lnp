@@ -1,0 +1,8 @@
+".\Objects\main.obj",
+".\Objects\bsp.obj",
+".\Objects\bsp_work.obj",
+".\Objects\bsp_delay.obj",
+".\Objects\bsp_int.obj",
+".\Objects\bsp_ir.obj" 
+TO ".\Objects\tenplate" 
+PRINT(".\Listings\tenplate.m51") RAMSIZE(256) 

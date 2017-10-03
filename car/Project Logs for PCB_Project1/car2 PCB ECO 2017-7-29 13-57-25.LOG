@@ -1,0 +1,4 @@
+Added Pin To Net: NetName=P3.3 Pin=IR1-1
+Added Pin To Net: NetName=GND Pin=IR1-2
+Added Pin To Net: NetName=NetC8_2 Pin=IR1-3
+Added Room: Name=car

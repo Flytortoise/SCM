@@ -1,0 +1,83 @@
+C51 COMPILER V9.01   MAIN                                                                  08/09/2017 16:40:10 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: F:\Keil\Keil5\C51\BIN\C51.EXE app\main.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\app\inc;.\bsp\inc;.\bsp)
+                    - DEBUG OBJECTEXTEND PRINT(.\Listings\main.lst) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include "bsp.h"
+   2          unsigned char code  LedShowData[]={0x03,0x9F,0x25,0x0D,0x99,  
+   3                                             0x49,0x41,0x1F,0x01,0x19};//0,1,2,3,4,5,6,7,8,9
+   4          unsigned char code  RecvData[]={0x19,0x46,0x15,0x43,0x44,0x40,0x0D,0x0E,0x00,0x0F};
+   5          unsigned char IRCOM[7];
+   6                               
+   7          bit EnableLight = 0;                                    
+   8                                         
+   9          unsigned char temp = 1;
+  10          sbit key1 = P3^2;
+  11          
+  12          void main()
+  13          {
+  14   1              int RunFlag=0;     
+  15   1              bsp_init();
+  16   1                                                                                                                         
+             - 
+  17   1              ControlCar(8);                         
+  18   1              while(1)                                
+  19   1              {
+  20   2                      if(key1 == 0)
+  21   2                      {
+  22   3                              delay_nms(10);
+  23   3                              if(key1 == 0)
+  24   3                              {
+  25   4                                      temp++;
+  26   4                                      while(!key1);
+  27   4                              }
+  28   3                      }
+  29   2                      
+  30   2                      if(temp > 3)
+  31   2                      {
+  32   3                              temp = 1;
+  33   3                      }
+  34   2                      
+  35   2                      switch(temp)
+  36   2                      {
+  37   3                              case 1: 
+  38   3                                      ShowPort = LedShowData[1];                      
+  39   3                                      EX1 = 1;
+  40   3                              break;
+  41   3                              
+  42   3                              case 2: 
+  43   3                                      ShowPort = LedShowData[2];
+  44   3                                      Robot_Avoidance();
+  45   3                                      EX1 = 0;
+  46   3                              break;
+  47   3                              
+  48   3                              case 3: 
+  49   3                                      ShowPort = LedShowData[3];
+  50   3                                      Robot_Traction();
+  51   3                                      EX1 = 0;
+  52   3      
+  53   3                              break;
+C51 COMPILER V9.01   MAIN                                                                  08/09/2017 16:40:10 PAGE 2   
+
+  54   3                      }
+  55   2              }
+  56   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     93    ----
+   CONSTANT SIZE    =     20    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      8       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      1    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

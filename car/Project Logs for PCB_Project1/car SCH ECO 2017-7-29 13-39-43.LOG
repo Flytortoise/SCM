@@ -1,0 +1,3 @@
+Remove Pin=IR1-OUT From Net=P3.3
+Change Component Comment: Designator=P1 Old Comment=10k New Comment=Header 9
+Change Component Comment: Designator=P4 Old Comment=560 New Comment=Header 9
