@@ -1,0 +1,11 @@
+Removed Pin From Net: NetName=GND Pin=C1-1
+Removed Pin From Net: NetName=NetC1_2 Pin=C1-2
+Change Component DesignItemId : Designator=C1 Old DesignItemId=CAP New DesignItemId=CAPD
+Change Component Footprint: Designator=C1 Old Footprint=0805C New Footprint=RB470U
+Change Component Comment : Designator=C1 Old Comment= New Comment=CAPD
+Added Component: Designator=C?(RB470U)
+Added Pin To Net: NetName=NetC1_2 Pin=C1-1
+Added Pin To Net: NetName=GND Pin=C1-2
+Change Net Name : Old Net Name=NetC1_2 New Net Name=NetC1_1
+Added Member To Class: ClassName=Demo Member=Component C? CAPD
+Added Room: Name=Demo

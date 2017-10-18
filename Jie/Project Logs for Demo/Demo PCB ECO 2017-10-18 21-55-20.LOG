@@ -1,0 +1,4 @@
+Added Component: Designator=JP2(HDR2X3H)
+Added Pin To Net: NetName=P3.0 Pin=JP2-3
+Added Member To Class: ClassName=Demo Member=Component JP2 COM
+Added Room: Name=Demo

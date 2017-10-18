@@ -1,0 +1,5 @@
+Remove Pin=JP2-1 From Net=USBTX
+Remove Pin=JP2-2 From Net=USBRX
+Remove Pin=JP2-4 From Net=P3.1
+Remove Pin=JP2-5 From Net=P3.0 232
+Remove Pin=JP2-6 From Net=P3.1 232
